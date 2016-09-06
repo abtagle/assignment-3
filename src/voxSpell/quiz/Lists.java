@@ -32,6 +32,7 @@ public class Lists {
 		_failed = readInFile(FAILED);
 		_lastFailed = readInFile(LAST_FAILED);
 	}
+
 	public static Lists getInstance(){
 		if (_thisList == null){
 			return new Lists();
@@ -39,6 +40,7 @@ public class Lists {
 			return _thisList;
 		}
 	}
+
 	private WordList readInFile(String filename){
 		WordList words = new WordList();
 		File wordList = new File(filename);
@@ -64,17 +66,18 @@ public class Lists {
 		return words;
 	}
 	//Reads in the wordlist file specified by the user
-	protected void setWordList(File file){
+	public void setWordList(File file){
 		_wordLists = new ArrayList<WordList>();
 		if(file.exists()){
 			try{
 				BufferedReader wordListRead = new BufferedReader(new FileReader(file));
 				String word;
-				int currentList = 0;
+				int currentList =-1;
 				while((word = wordListRead.readLine()) != null){
-					if((word.equals("") == false && (word.equals("\\s+") == false))){
+					if((word.equals("") == false && (word.equals("\\s+") == false)&& word.charAt(0)!='%')){
 						_wordLists.get(currentList).addWord(word);
 					}else if (word.charAt(0)=='%'){
+						_wordLists.add(new WordList());
 						currentList++;
 					}
 				}

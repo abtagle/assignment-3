@@ -2,9 +2,8 @@ package voxSpell.quiz;
 
 public class Review extends Quiz {
 
-	public Review(WordList wordlist, String name) {
-		super(wordlist, name);
-		_isReview = true;
+	public Review(int level) {
+		super(level);
 	}
 	//hook method implemented to spell word aloud if the word is failed, and give another opportunity to spell it
 	protected void spellAloud(String word) {

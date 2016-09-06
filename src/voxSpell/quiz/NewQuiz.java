@@ -1,8 +1,8 @@
 package voxSpell.quiz;
 
 public class NewQuiz extends Quiz {
-	public NewQuiz(WordList wordlist, String name) {
-		super(wordlist, name);
+	public NewQuiz(int level) {
+		super(level);
 	}
 
 	@Override
