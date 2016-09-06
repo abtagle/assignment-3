@@ -1,4 +1,4 @@
-package voxSpell.quiz;
+package voxSpell.gui;
 
 import java.util.ArrayList;
 import java.util.Collections;

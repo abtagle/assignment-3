@@ -9,8 +9,6 @@ import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import voxSpell.quiz.Lists;
-
 /**
  * Assignment 2 for Softeng 206- creating a GUI spelling aid
  * 

@@ -9,9 +9,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import voxSpell.quiz.Lists;
-import voxSpell.quiz.ViewStats;
 public class WelcomeScreen implements ActionListener{
 
 	//GridBagLayout structure from Oracle https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/layout/GridBagLayoutDemoProject/src/layout/GridBagLayoutDemo.java
@@ -94,22 +91,22 @@ public class WelcomeScreen implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if((JButton)event.getSource() == _newQuiz){
-			if(Lists.getInstance().getWordList(GUI.getLevel()) == null || (Lists.getInstance().getWordList(GUI.getLevel()).length() == 0)){
+			if(Lists.getInstance().getWordList(GUI.getLevel()) == null || Lists.getInstance().getWordList(GUI.getLevel()).length() == 0){
 				JOptionPane.showMessageDialog(null, "Error: no words for New Quiz loaded. Please restart application and load a file of the correct format.", "New Quiz", JOptionPane.ERROR_MESSAGE);
 			} else{
-				new QuizScreen("New Quiz", false);
+				new NewQuiz(Lists.getInstance().getWordList(GUI.getLevel()), "New Quiz");
 			}
 		} else if (event.getSource() == _review){
 			if(Lists.getInstance().getLastFailed().length() == 0){
 				JOptionPane.showMessageDialog(null, "There are no words available to review. Please try starting a new quiz.", "Review", JOptionPane.ERROR_MESSAGE);
 			} else{
-				new QuizScreen("Review", true);
+				new Review(Lists.getInstance().getLastFailed(), "Review");
 			}
 		} else if (event.getSource() == _viewStats){
 			new ViewStats();
 
 		} else if (event.getSource() == _clearStats){
-			
+			//new ClearStats();
 		}
 	}
 	/**

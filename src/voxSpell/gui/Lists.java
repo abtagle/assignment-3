@@ -1,4 +1,4 @@
-package voxSpell.quiz;
+package voxSpell.gui;
 
 import java.io.BufferedReader;
 import java.io.File;

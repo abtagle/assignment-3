@@ -1,4 +1,4 @@
-package voxSpell.quiz;
+package voxSpell.gui;
 
 import java.awt.Container;
 import java.awt.BorderLayout;
@@ -13,9 +13,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-
-import voxSpell.gui.GUI;
-import voxSpell.gui.WelcomeScreen;
 
 public class ViewStats {
 	private static final int COLUMNS = 4;
