@@ -5,18 +5,15 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.SwingWorker;
+
+import voxSpell.gui.GUI;
 
 public abstract class Quiz{
 	protected String _name;
 	protected boolean _isReview = false;
 	protected ArrayList<String> _wordlist = null;
-	protected JLabel _wordNumber = null;
-	protected JLabel _title = null;
-	protected JTextField _spellingBar = null;
 	protected JButton _submit = null;
-	protected JLabel _correct = null;
 	protected int _attemptNumber;
 	protected int _wordNumberInt;
 
@@ -30,9 +27,12 @@ public abstract class Quiz{
 			_wordlist = Lists.getInstance().getWordList(level).returnTestlist();
 		}
 		
-		if( _spellingBar.getText().trim().equals("") == false){
-			//make lower case and check for invalid cahracters
-			String spelling = _spellingBar.getText().toLowerCase().trim();
+		
+	}
+	public final void checkSpelling(String spelling, JLabel wordLabel){
+		if( spelling.trim().equals("") == false){
+			//make lower case and check for invalid characters
+			//spelling.toLowerCase().trim();
 			if(containsInvalidCharacters(spelling) == false){
 				//first attempt
 				try{
@@ -44,6 +44,7 @@ public abstract class Quiz{
 							}
 							_wordNumberInt++;
 							new SayAnything("Correct").doInBackground();
+							wordLabel.setText("Spell word "+ _wordNumberInt + " of " +GUI.NUMBER_OF_LEVELS);
 						} else{
 							_attemptNumber++;
 							new SayAnything("Incorrect. Please try again.").doInBackground();
@@ -77,6 +78,7 @@ public abstract class Quiz{
 						}
 						_attemptNumber = 1;
 						_wordNumberInt++;
+						wordLabel.setText("Spell word "+ _wordNumberInt + " of " + GUI.NUMBER_OF_LEVELS);
 						quizQuestion();
 					}
 				} catch (Exception e){
@@ -88,13 +90,9 @@ public abstract class Quiz{
 
 		} 
 	}
-
-	protected final void quizQuestion(){
-		_spellingBar.setText("");
+	public final void quizQuestion(){
 		//Only quiz if there are words left to quiz
 		if(_wordNumberInt <=_wordlist.size()){
-			_wordNumber.setText("Spell word " + _wordNumberInt + " of " + _wordlist.size());
-			_wordNumber.repaint();
 			try {
 				SayAnything w = new SayAnything(_wordlist.get(_wordNumberInt-1));
 				if(_attemptNumber == 2){
@@ -103,7 +101,7 @@ public abstract class Quiz{
 				w.doInBackground();
 			} catch (Exception e) {
 				e.printStackTrace();
-				_correct.setText("Error saying word");
+				JOptionPane.showMessageDialog(null, "Error saying word", "Quiz Error", JOptionPane.ERROR_MESSAGE);
 			}
 			//If there are no words left to quiz, go back to main menu
 		}
@@ -118,6 +116,10 @@ public abstract class Quiz{
 			}
 		}
 		return false;
+	}
+	
+	public void sayWord(){
+		new SayAnything(_wordlist.get(_wordNumberInt-1));
 	}
 
 	//Hook method for spelling aloud implementation
