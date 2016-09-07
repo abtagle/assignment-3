@@ -23,7 +23,7 @@ public class TestStats {
 		pane.add(_title);
 		//From: http://stackoverflow.com/questions/2715118/how-to-change-the-size-of-the-font-of-a-jlabel-to-take-the-maximum-size
 		_title.setFont(GUI.TITLE_FONT);
-		_score = new JLabel("You scored "+ _score +" out of 10", JLabel.CENTER);
+		_score = new JLabel("You scored "+ score +" out of 10", JLabel.CENTER);
 		pane.add(_score);
 		_home = new JButton("Return to Menu");
 		GUI.getInstance().getFrame().getRootPane().setDefaultButton(_home);
