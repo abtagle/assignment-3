@@ -58,6 +58,9 @@ public class GUI implements WindowListener{
 	public static int getLevel(){
 		return _level;
 	}
+	public static void increaseLevel(){
+		_level++;
+	}
 	public static GUI getInstance(){
 		if (_gui == null){
 			_gui = new GUI();

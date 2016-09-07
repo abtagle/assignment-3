@@ -37,7 +37,7 @@ public class SelectLevel {
 		GUI.getInstance().getContentPane().add(submitLevel);
 		
 		submitLevel.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event) {
-			GUI.getInstance().setLevel(select.getSelectedIndex()+1);
+			GUI.getInstance().setLevel(select.getSelectedIndex());
 			//Choose file with Level words
 			JOptionPane.showMessageDialog(null, "Please select a file to read words from", "Select a wordlist", JOptionPane.INFORMATION_MESSAGE);
 		    //From: https://docs.oracle.com/javase/7/docs/api/javax/swing/JFileChooser.html

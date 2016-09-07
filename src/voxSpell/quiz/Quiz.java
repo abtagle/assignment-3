@@ -3,23 +3,26 @@ package voxSpell.quiz;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 import voxSpell.gui.GUI;
+import voxSpell.gui.QuizScreen;
 
 public abstract class Quiz{
 	protected String _name;
+	protected int _score;
 	protected boolean _isReview = false;
 	protected ArrayList<String> _wordlist = null;
 	protected JButton _submit = null;
 	protected int _attemptNumber;
 	protected int _wordNumberInt;
+	protected QuizScreen _screen;
 
-	public Quiz(int level){
+	public Quiz(int level, QuizScreen screen){
 		_wordNumberInt = 1;
 		_attemptNumber = 1;
+		_screen = screen;
 		//check which list to get words from
 		if(_isReview){
 			_wordlist = Lists.getInstance().getLastFailed().returnTestlist();
@@ -29,7 +32,7 @@ public abstract class Quiz{
 		
 		
 	}
-	public final void checkSpelling(String rawSpelling, JLabel wordLabel){
+	public final void checkSpelling(String rawSpelling){
 		if( rawSpelling.trim().equals("") == false){
 			//make trim string
 			String spelling = rawSpelling.trim();
@@ -43,8 +46,9 @@ public abstract class Quiz{
 								Lists.getInstance().getLastFailed().remove(_wordlist.get(_wordNumberInt-1));
 							}
 							_wordNumberInt++;
+							_score++;
 							new SayAnything("Correct").doInBackground();
-							wordLabel.setText("Spell word "+ _wordNumberInt + " of " +GUI.NUMBER_OF_LEVELS);
+							updateWordNumberInGUI();
 						} else{
 							_attemptNumber++;
 							new SayAnything("Incorrect. Please try again.").doInBackground();
@@ -58,8 +62,10 @@ public abstract class Quiz{
 							if(Lists.getInstance().getLastFailed().contains(_wordlist.get(_wordNumberInt-1))){
 								Lists.getInstance().getLastFailed().remove(_wordlist.get(_wordNumberInt-1));
 							}
+							_score++;
 							_attemptNumber = 1;
 							_wordNumberInt++;
+							updateWordNumberInGUI();
 							quizQuestion();
 						} else{
 							new SayAnything("Incorrect.").doInBackground();
@@ -78,7 +84,7 @@ public abstract class Quiz{
 						}
 						_attemptNumber = 1;
 						_wordNumberInt++;
-						wordLabel.setText("Spell word "+ _wordNumberInt + " of " + GUI.NUMBER_OF_LEVELS);
+						updateWordNumberInGUI();
 						quizQuestion();
 					}
 				} catch (Exception e){
@@ -104,17 +110,24 @@ public abstract class Quiz{
 			}
 			//If there are no words left to quiz, go back to main menu
 		} else {
+			if(_score >= 9 && GUI.getLevel()!=GUI.NUMBER_OF_LEVELS){
+				GUI.increaseLevel();
+			}
 			showStats();
 		}
 	}
 	
 	protected abstract void showStats();
+	
+	protected void updateWordNumberInGUI(){
+		_screen.updateWordNumber(_wordNumberInt, _wordlist.size());
+	}
 
 	//Returns true if string has characters which are not letters
 	protected final boolean containsInvalidCharacters(String word){
 		char[] wordArray = word.trim().toCharArray();
 		for	(char i : wordArray){
-			if(i < 'a' || i > 'z'){
+			if(i < 'A' || i > 'z'){
 				return true;
 			}
 		}

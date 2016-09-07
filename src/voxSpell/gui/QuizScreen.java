@@ -30,9 +30,9 @@ public class QuizScreen {
 		_isReview = review;
 		addComponentsToPane();
 		if (_isReview){
-			_currentQuiz = new Review(GUI.getLevel());
+			_currentQuiz = new Review(GUI.getLevel(), this);
 		} else{
-			_currentQuiz = new NewQuiz(GUI.getLevel());
+			_currentQuiz = new NewQuiz(GUI.getLevel(), this);
 		}
 		_currentQuiz.quizQuestion();
 	}
@@ -56,7 +56,7 @@ public class QuizScreen {
 		GUI.getInstance().getFrame().getRootPane().setDefaultButton(_submit);
 		pane.add(_submit);
 		_submit.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event) {
-			_currentQuiz.checkSpelling(_spellingBar.getText(), _wordNumber);	
+			_currentQuiz.checkSpelling(_spellingBar.getText());	
 			_spellingBar.setText("");				
 			}
 		});
@@ -68,5 +68,9 @@ public class QuizScreen {
 			}
 		});
 		pane.setVisible(true);
+	}
+	
+	public void updateWordNumber(int number, int total){
+		_wordNumber.setText("Spell word " + number +" of " + total);
 	}
 }
