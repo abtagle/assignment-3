@@ -35,7 +35,7 @@ public class TestStats {
 		if(score >=9 ){
 			_videoReward = new JButton("Play Video Reward");
 			_videoReward.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event) {
-
+				new VideoReward();
 			}
 			});
 			pane.add(_videoReward);
