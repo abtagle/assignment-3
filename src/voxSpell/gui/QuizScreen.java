@@ -56,7 +56,7 @@ public class QuizScreen {
 		GUI.getInstance().getFrame().getRootPane().setDefaultButton(_submit);
 		pane.add(_submit);
 		_submit.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event) {
-			_currentQuiz.checkSpelling(_submit.getText(), _wordNumber);	
+			_currentQuiz.checkSpelling(_spellingBar.getText(), _wordNumber);	
 			_spellingBar.setText("");				
 			}
 		});

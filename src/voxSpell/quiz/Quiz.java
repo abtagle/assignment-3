@@ -29,12 +29,12 @@ public abstract class Quiz{
 		
 		
 	}
-	public final void checkSpelling(String spelling, JLabel wordLabel){
-		if( spelling.trim().equals("") == false){
-			//make lower case and check for invalid characters
-			//spelling.toLowerCase().trim();
+	public final void checkSpelling(String rawSpelling, JLabel wordLabel){
+		if( rawSpelling.trim().equals("") == false){
+			//make trim string
+			String spelling = rawSpelling.trim();
 			if(containsInvalidCharacters(spelling) == false){
-				//first attempt
+				//first attempts
 				try{
 					if(_attemptNumber == 1){
 						if(spelling.equals(_wordlist.get(_wordNumberInt-1).toLowerCase())){
@@ -94,22 +94,25 @@ public abstract class Quiz{
 		//Only quiz if there are words left to quiz
 		if(_wordNumberInt <=_wordlist.size()){
 			try {
-				SayAnything w = new SayAnything(_wordlist.get(_wordNumberInt-1));
+				sayWord();
 				if(_attemptNumber == 2){
-					w.doInBackground();
+					sayWord();
 				}
-				w.doInBackground();
 			} catch (Exception e) {
 				e.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Error saying word", "Quiz Error", JOptionPane.ERROR_MESSAGE);
 			}
 			//If there are no words left to quiz, go back to main menu
+		} else {
+			showStats();
 		}
 	}
+	
+	protected abstract void showStats();
 
 	//Returns true if string has characters which are not letters
 	protected final boolean containsInvalidCharacters(String word){
-		char[] wordArray = word.toCharArray();
+		char[] wordArray = word.trim().toCharArray();
 		for	(char i : wordArray){
 			if(i < 'a' || i > 'z'){
 				return true;
@@ -119,7 +122,13 @@ public abstract class Quiz{
 	}
 	
 	public void sayWord(){
-		new SayAnything(_wordlist.get(_wordNumberInt-1));
+		SayAnything word = new SayAnything(_wordlist.get(_wordNumberInt-1));
+		try {
+			word.doInBackground();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	//Hook method for spelling aloud implementation

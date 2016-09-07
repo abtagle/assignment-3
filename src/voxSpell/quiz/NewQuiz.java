@@ -12,4 +12,10 @@ public class NewQuiz extends Quiz {
 		quizQuestion();
 	}
 
+	@Override
+	protected void showStats() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

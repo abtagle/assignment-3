@@ -25,6 +25,11 @@ public class Review extends Quiz {
 			e.printStackTrace();
 		}
 	}
+	@Override
+	protected void showStats() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
 
