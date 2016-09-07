@@ -65,7 +65,7 @@ public class WelcomeScreen implements ActionListener{
 		c.gridy = 1;
 		GUI.getInstance().getContentPane().add(welcome, c);
 		
-		JLabel level = createJLabel("You are on level " + (GUI.getLevel()+1));
+		JLabel level = createJLabel("You are on Level " + (GUI.getLevel()+1));
 		c.gridx = 0;
 		c.gridy = 2;
 		GUI.getInstance().getContentPane().add(level, c);

@@ -25,12 +25,14 @@ public class SelectLevel {
 		_title.setFont(GUI.TITLE_FONT);
 		_title.setHorizontalAlignment(JLabel.CENTER);
 		GUI.getInstance().getContentPane().add(_title);
+		//Create a model for JComboBox to select the level
 		DefaultComboBoxModel<Integer> selectModel = new DefaultComboBoxModel<Integer>();
 		for(int i = 1; i <= GUI.NUMBER_OF_LEVELS; i++){
 			selectModel.addElement(i);
 		}
 		JComboBox<Integer> select = new JComboBox<Integer>(selectModel);
-		select.setAlignmentX(JComboBox.CENTER_ALIGNMENT);
+		((JLabel)select.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
+		((JLabel)select.getRenderer()).setFont(GUI.TITLE_FONT);
 		JButton submitLevel = new JButton("Choose Level");
 		submitLevel.setMaximumSize(new Dimension(500,100));
 		GUI.getInstance().getContentPane().add(select);

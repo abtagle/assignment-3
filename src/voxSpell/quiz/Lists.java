@@ -12,6 +12,8 @@ import java.util.Collections;
 
 import javax.swing.JOptionPane;
 
+import voxSpell.gui.GUI;
+
 public class Lists {
 	public static final String MASTERED = ".mastered";
 	public static final String FAULTED = ".faulted";
@@ -22,15 +24,19 @@ public class Lists {
 	private WordList _faulted;
 	private WordList _failed;
 	private WordList _lastFailed;
+	private ArrayList<ArrayList<Integer>> _scores;
 	private static Lists _thisList = null;
 
 	private Lists(){
 		//Reads in all the statistics storing lists if they already  exist
 		_thisList = this;
+		
 		_mastered = readInFile(MASTERED);
 		_faulted = readInFile(FAULTED);
 		_failed = readInFile(FAILED);
 		_lastFailed = readInFile(LAST_FAILED);
+		
+		_scores = new ArrayList<ArrayList<Integer>>(GUI.NUMBER_OF_LEVELS);
 	}
 
 	public static Lists getInstance(){
@@ -132,6 +138,10 @@ public class Lists {
 		}
 		writer.close();
 
+	}
+
+	protected void addScore(int score){
+		_scores.get(GUI.getLevel()).add(score);
 	}
 
 }

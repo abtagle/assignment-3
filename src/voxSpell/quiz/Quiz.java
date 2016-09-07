@@ -29,13 +29,13 @@ public abstract class Quiz{
 		}else{
 			_wordlist = Lists.getInstance().getWordList(level).returnTestlist();
 		}
-		
-		
+
+
 	}
 	public final void checkSpelling(String rawSpelling){
 		if( rawSpelling.trim().equals("") == false){
 			//make trim string
-			String spelling = rawSpelling.trim();
+			String spelling = rawSpelling.trim().toLowerCase();
 			if(containsInvalidCharacters(spelling) == false){
 				//first attempts
 				try{
@@ -108,17 +108,19 @@ public abstract class Quiz{
 				e.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Error saying word", "Quiz Error", JOptionPane.ERROR_MESSAGE);
 			}
-			//If there are no words left to quiz, go back to main menu
+			//If there are no words left to quiz, show results
 		} else {
+			//Lists.getInstance().addScore(_score);
+			//level up if the person is too good
 			if(_score >= 9 && GUI.getLevel()!=GUI.NUMBER_OF_LEVELS){
 				GUI.increaseLevel();
 			}
 			showStats();
 		}
 	}
-	
+
 	protected abstract void showStats();
-	
+
 	protected void updateWordNumberInGUI(){
 		_screen.updateWordNumber(_wordNumberInt, _wordlist.size());
 	}
@@ -133,7 +135,7 @@ public abstract class Quiz{
 		}
 		return false;
 	}
-	
+
 	public void sayWord(){
 		SayAnything word = new SayAnything(_wordlist.get(_wordNumberInt-1));
 		try {

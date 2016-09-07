@@ -19,7 +19,6 @@ public class NewQuiz extends Quiz {
 	@Override
 	protected void showStats() {
 		new TestStats(_score);
-		
 	}
 
 }

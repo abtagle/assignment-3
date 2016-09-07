@@ -9,7 +9,7 @@ import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import voxSpell.quiz.Lists;
+//import voxSpell.quiz.Lists;
 
 /**
  * Assignment 2 for Softeng 206- creating a GUI spelling aid
@@ -39,7 +39,7 @@ public class GUI implements WindowListener{
 	}
 	private GUI(){
 		//Create and set up the window.
-		_frame = new JFrame("Spelling Aid");
+		_frame = new JFrame("VOXSPELL");
 		_frame.addWindowListener(this);
 		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -81,7 +81,7 @@ public class GUI implements WindowListener{
 	}
 	@Override
 	public void windowClosing(WindowEvent arg0) {
-		Lists.getInstance().writeAllStats();
+		//Lists.getInstance().writeAllStats();
 	}
 	@Override
 	public void windowDeactivated(WindowEvent arg0) {
