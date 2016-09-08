@@ -21,37 +21,36 @@ public class QuizScreen {
 	protected JTextField _spellingBar = null;
 	protected JButton _submit = null;
 	protected JButton _replay = null;
-	protected JLabel _correct = null;
+	protected JButton _viewStats = null;
 	protected int _wordNumberInt;
 	protected Quiz _currentQuiz = null;
 	
 	public QuizScreen(String name, boolean review){
 		_name = name;
 		_isReview = review;
-		addComponentsToPane();
 		if (_isReview){
 			_currentQuiz = new Review(GUI.getLevel(), this);
 		} else{
 			_currentQuiz = new NewQuiz(GUI.getLevel(), this);
 		}
+		addComponentsToPane();
 		_currentQuiz.quizQuestion();
 	}
 
 	protected void addComponentsToPane() {
 		Container pane = GUI.getInstance().getContentPane();
 		pane.setVisible(false);
-		pane.setLayout(new GridLayout(5,0));
+		pane.setLayout(new GridLayout(6,0));
 		pane.removeAll();
 		_title = new JLabel(_name, JLabel.CENTER);
 		pane.add(_title);
 		//From: http://stackoverflow.com/questions/2715118/how-to-change-the-size-of-the-font-of-a-jlabel-to-take-the-maximum-size
 		_title.setFont(GUI.TITLE_FONT);
-		_wordNumber = new JLabel("Spell word 1 of " +GUI.NUMBER_OF_LEVELS, JLabel.CENTER);
+		_wordNumber = new JLabel("Spell word 1 of " + _currentQuiz.getNumberOfWords(), JLabel.CENTER);
 		pane.add(_wordNumber);
 		_spellingBar = new JTextField();
 		_spellingBar.setText("Spell words here");
 		pane.add(_spellingBar);
-		_correct = new JLabel();
 		_submit = new JButton("Check Spelling");
 		GUI.getInstance().getFrame().getRootPane().setDefaultButton(_submit);
 		pane.add(_submit);
@@ -64,6 +63,13 @@ public class QuizScreen {
 		pane.add(_replay);
 		GUI.getInstance().getFrame().repaint();
 		_replay.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event) {
+				_currentQuiz.sayWord();
+			}
+		});
+		_viewStats = new JButton("View Stats");
+		pane.add(_viewStats);
+		GUI.getInstance().getFrame().repaint();
+		_viewStats.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event) {
 				_currentQuiz.sayWord();
 			}
 		});

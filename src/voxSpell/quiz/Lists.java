@@ -35,8 +35,6 @@ public class Lists {
 		_faulted = readInFile(FAULTED);
 		_failed = readInFile(FAILED);
 		_lastFailed = readInFile(LAST_FAILED);
-		
-		_scores = new ArrayList<ArrayList<Integer>>(GUI.NUMBER_OF_LEVELS);
 	}
 
 	public static Lists getInstance(){
@@ -96,6 +94,7 @@ public class Lists {
 				JOptionPane.showMessageDialog(null, "Error: unable to read from word list " + file.getName() + ".");
 			}
 		}
+		_scores = new ArrayList<ArrayList<Integer>>(GUI.NUMBER_OF_LEVELS);
 	}
 
 	public WordList getWordList(int level){

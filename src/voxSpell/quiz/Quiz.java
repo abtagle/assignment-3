@@ -110,11 +110,11 @@ public abstract class Quiz{
 			}
 			//If there are no words left to quiz, show results
 		} else {
-			//Lists.getInstance().addScore(_score);
 			//level up if the person is too good
 			if(_score >= 9 && GUI.getLevel()!=GUI.NUMBER_OF_LEVELS){
 				GUI.increaseLevel();
 			}
+			//Lists.getInstance().addScore(_score);
 			showStats();
 		}
 	}
@@ -129,7 +129,7 @@ public abstract class Quiz{
 	protected final boolean containsInvalidCharacters(String word){
 		char[] wordArray = word.trim().toCharArray();
 		for	(char i : wordArray){
-			if(i < 'A' || i > 'z'){
+			if(i < 'a' || i > 'z'){
 				return true;
 			}
 		}
@@ -146,9 +146,15 @@ public abstract class Quiz{
 		}
 	}
 
-	//Hook method for spelling aloud implementation
+	/*
+	 * Hook method for spelling aloud implementation
+	 */
 	protected abstract void spellAloud(String word);
 
+	public int getNumberOfWords(){
+		return _wordlist.size();
+	}
+	
 	//Says words in background (unnecessary SwingWorker, but implemented before I realised timing issues with festival
 	//Hopefully can find a way to adapt this
 	class SayAnything extends SwingWorker<Void, Void>{
@@ -173,4 +179,5 @@ public abstract class Quiz{
 		}
 
 	}
+	
 }

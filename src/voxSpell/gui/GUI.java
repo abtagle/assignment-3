@@ -21,7 +21,7 @@ import javax.swing.JLabel;
 
 //Must also be able to tell when the window is closing to save everything from the GUI
 public class GUI implements WindowListener{
-	public static final int NUMBER_OF_LEVELS = 10;
+	public static final int NUMBER_OF_LEVELS = 11;
 	private static int _level;
 	
 	//From: http://stackoverflow.com/questions/7140248/get-system-default-font
