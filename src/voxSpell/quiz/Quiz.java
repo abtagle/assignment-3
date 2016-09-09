@@ -110,13 +110,19 @@ public abstract class Quiz{
 			}
 			//If there are no words left to quiz, show results
 		} else {
-			//level up if the person is too good
-			if(_score >= 9 && GUI.getLevel()!=GUI.NUMBER_OF_LEVELS){
-				GUI.increaseLevel();
+			if(_isReview == false){
+				if(_score >= 9 && GUI.getLevel()!=GUI.NUMBER_OF_LEVELS){
+					//From http://stackoverflow.com/questions/8396870/joptionpane-yes-or-no-window
+					int reply = JOptionPane.showConfirmDialog(null, "Congratulations! You scored " + _score + " out of " + _wordlist.size() + ". Would you like to LEVEL UP?", "Level up!", JOptionPane.YES_NO_OPTION);
+					if (reply == JOptionPane.YES_OPTION) {
+						GUI.increaseLevel();
+						JOptionPane.showMessageDialog(null, "You have now LEVELED UP", "Level up!", JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
 			}
 			Lists.getInstance().addScore(_score);
 			showStats();
-		}
+		}	
 	}
 
 	protected abstract void showStats();
@@ -154,7 +160,7 @@ public abstract class Quiz{
 	public int getNumberOfWords(){
 		return _wordlist.size();
 	}
-	
+
 	//Says words in background (unnecessary SwingWorker, but implemented before I realised timing issues with festival
 	//Hopefully can find a way to adapt this
 	class SayAnything extends SwingWorker<Void, Void>{
@@ -179,5 +185,5 @@ public abstract class Quiz{
 		}
 
 	}
-	
+
 }
