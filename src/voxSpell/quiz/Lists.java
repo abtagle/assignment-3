@@ -35,6 +35,10 @@ public class Lists {
 		_faulted = readInFile(FAULTED);
 		_failed = readInFile(FAILED);
 		_lastFailed = readInFile(LAST_FAILED);
+		_scores = new ArrayList<ArrayList<Integer>>();
+		for(int i = 0; i<GUI.NUMBER_OF_LEVELS; i++){
+			_scores.add(new ArrayList<Integer>());
+		}
 	}
 
 	public static Lists getInstance(){
@@ -94,7 +98,21 @@ public class Lists {
 				JOptionPane.showMessageDialog(null, "Error: unable to read from word list " + file.getName() + ".");
 			}
 		}
-		_scores = new ArrayList<ArrayList<Integer>>(GUI.NUMBER_OF_LEVELS);
+	}
+	
+	protected void addScore(int score){
+		_scores.get(GUI.getLevel()).add(score);
+	}
+	
+	protected double getAverageScore(int level){
+		int total = 0;
+		if ((_scores.get(level)).size() == 0){
+			return -1;
+		}
+		for(int i : _scores.get(level)){
+			total += i;
+		}
+		return (double)total / (_scores.get(level).size());
 	}
 
 	public WordList getWordList(int level){
@@ -137,10 +155,6 @@ public class Lists {
 		}
 		writer.close();
 
-	}
-
-	protected void addScore(int score){
-		_scores.get(GUI.getLevel()).add(score);
 	}
 
 }

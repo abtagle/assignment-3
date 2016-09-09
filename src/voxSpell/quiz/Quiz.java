@@ -114,7 +114,7 @@ public abstract class Quiz{
 			if(_score >= 9 && GUI.getLevel()!=GUI.NUMBER_OF_LEVELS){
 				GUI.increaseLevel();
 			}
-			//Lists.getInstance().addScore(_score);
+			Lists.getInstance().addScore(_score);
 			showStats();
 		}
 	}
