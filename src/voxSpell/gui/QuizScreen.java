@@ -61,18 +61,17 @@ public class QuizScreen {
 		});
 		_replay = new JButton("Play Word Again");
 		pane.add(_replay);
-		GUI.getInstance().getFrame().repaint();
 		_replay.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event) {
 				_currentQuiz.sayWord();
 			}
 		});
 		_viewStats = new JButton("View Stats");
 		pane.add(_viewStats);
-		GUI.getInstance().getFrame().repaint();
 		_viewStats.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event) {
-				_currentQuiz.sayWord();
+				
 			}
 		});
+		GUI.getInstance().getFrame().repaint();
 		pane.setVisible(true);
 	}
 	

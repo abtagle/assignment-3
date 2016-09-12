@@ -24,6 +24,7 @@ public class WelcomeScreen implements ActionListener{
 	private JButton _review;
 	private JButton _viewStats;
 	private JButton _clearStats;
+	private JButton _settings;
 	public WelcomeScreen (){
 		GUI.getInstance().getContentPane().removeAll();
 		GUI.getInstance().getFrame().setVisible(false);
@@ -94,6 +95,9 @@ public class WelcomeScreen implements ActionListener{
 
 		_clearStats = new JButton("Clear Statistics");
 		setButtonConstraints(_clearStats, c, 1, 3);
+		
+		_settings = new JButton("Settings");
+		setButtonConstraints(_settings, c, 1, 4);
 	}
 
 	//Menu listener- new action option object created depending on the option pressed
@@ -116,6 +120,8 @@ public class WelcomeScreen implements ActionListener{
 
 		} else if (event.getSource() == _clearStats){
 			
+		} else if (event.getSource() == _settings){
+			new Settings();
 		}
 	}
 	/**
