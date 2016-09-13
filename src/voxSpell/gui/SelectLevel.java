@@ -7,8 +7,6 @@ package voxSpell.gui;
 //Modified by Aimee Tagle 13/09/2016
 //		Made to actually fit purpose- tool just used to get components in correct position
 //======================================================
-import voxSpell.quiz.Lists;
-
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.imageio.ImageIO;
@@ -25,9 +23,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JButton;
 public class SelectLevel {
 

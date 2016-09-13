@@ -57,6 +57,7 @@ public class GUI implements WindowListener{
 		_frame.setSize(_frameSize);
 		_frame.setVisible(true);
 		new SelectLevel();
+		//new QuizScreen("New Quiz", false);
 
 	}
 	public static int getLevel(){

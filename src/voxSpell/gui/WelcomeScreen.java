@@ -22,16 +22,16 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 public class WelcomeScreen {
 
-	JPanel _panel;
-	JLabel _title;
-	JLabel _pleaseSelect;
-	JButton _newQuiz;
-	JButton _review;
-	JButton _viewStats;
-	JButton _clearStats;
-	JButton _settings;
-	JLabel _level;
-	JLabel _image;
+	private JPanel _panel;
+	private JLabel _title;
+	private JLabel _pleaseSelect;
+	private JButton _newQuiz;
+	private JButton _review;
+	private JButton _viewStats;
+	private JButton _clearStats;
+	private JButton _settings;
+	private JLabel _level;
+	private JLabel _image;
 
 	public WelcomeScreen() {
 
@@ -55,9 +55,9 @@ public class WelcomeScreen {
 		gb_panel.setConstraints(_title, gbc_panel);
 		_panel.add(_title);
 
-		_pleaseSelect = new JLabel("Please select from one of the following options");
+		_pleaseSelect = new JLabel("Select an option below");
 		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 1;
+		gbc_panel.gridy =10;
 		gbc_panel.gridwidth = 20;
 		gbc_panel.gridheight = 1;
 		gbc_panel.fill = GridBagConstraints.VERTICAL;
@@ -149,19 +149,21 @@ public class WelcomeScreen {
 		//From http://stackoverflow.com/questions/299495/how-to-add-an-image-to-a-jpanel
 		BufferedImage myPicture;
 		try {
-			_image = new JLabel("Hello");
-			myPicture = ImageIO.read(new File("./src/nasser_concept.png"));
+			_image = new JLabel("             ");
+			myPicture = ImageIO.read(new File("./src/nasser_concept-mini.png"));
 			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
 			_image.add(picLabel);
+			GridBagLayout gb_image = new GridBagLayout();
+			_image.setLayout(gb_image);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 3;
+		gbc_panel.gridx = 15;
+		gbc_panel.gridy =0;
 		gbc_panel.gridwidth = 20;
-		gbc_panel.gridheight = 1;
-		gbc_panel.fill = GridBagConstraints.NORTH;
+		gbc_panel.gridheight = 30;
+		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.weightx = 1;
 		gbc_panel.weighty = 1;
 		gbc_panel.anchor = GridBagConstraints.NORTH;
@@ -170,7 +172,7 @@ public class WelcomeScreen {
 
 		_level = new JLabel("You are on Level " + (GUI.getLevel()+1));
 		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 10;
+		gbc_panel.gridy = 8;
 		gbc_panel.gridwidth = 20;
 		gbc_panel.gridheight = 1;
 		gbc_panel.fill = GridBagConstraints.VERTICAL;
@@ -179,8 +181,7 @@ public class WelcomeScreen {
 		gbc_panel.anchor = GridBagConstraints.NORTH;
 		gb_panel.setConstraints(_level, gbc_panel);
 		_panel.add(_level);
-
-
+		
 		GUI.getInstance().getFrame().setContentPane(_panel);
 		GUI.getInstance().getFrame().pack();
 		GUI.getInstance().getFrame().setVisible(true);

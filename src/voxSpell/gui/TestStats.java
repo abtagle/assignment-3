@@ -13,11 +13,12 @@ public class TestStats {
 	private JLabel _score;
 	private JButton _videoReward;
 	private JButton _home;
+	private JButton _stats;
 
 	public TestStats(int score){
 		Container pane = GUI.getInstance().getContentPane();
 		pane.setVisible(false);
-		pane.setLayout(new GridLayout(4,0));
+		pane.setLayout(new GridLayout(5,0));
 		pane.removeAll();
 		_title = new JLabel("Congratulations", JLabel.CENTER);
 		pane.add(_title);
@@ -25,6 +26,13 @@ public class TestStats {
 		_title.setFont(GUI.TITLE_FONT);
 		_score = new JLabel("You scored "+ score +" out of 10", JLabel.CENTER);
 		pane.add(_score);
+		_stats = new JButton("View Stats");
+		GUI.getInstance().getFrame().getRootPane().setDefaultButton(_stats);
+		pane.add(_stats);
+		_stats.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event) {
+			new WelcomeScreen();			
+		}
+		});
 		_home = new JButton("Return to Menu");
 		GUI.getInstance().getFrame().getRootPane().setDefaultButton(_home);
 		pane.add(_home);
