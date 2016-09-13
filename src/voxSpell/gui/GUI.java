@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 //Must also be able to tell when the window is closing to save everything from the GUI
 public class GUI implements WindowListener{
 	public static final int NUMBER_OF_LEVELS = 11;
+	private static Dimension _frameSize;
 	private static int _level;
 	
 	//From: http://stackoverflow.com/questions/7140248/get-system-default-font
@@ -48,8 +49,8 @@ public class GUI implements WindowListener{
 	}
 	private void createAndShowGUI() {
 		//Set up the content pane.
-		Dimension frameSize = new Dimension(600,400);
-		_frame.setSize(frameSize);
+		_frameSize = new Dimension(600,400);
+		_frame.setSize(_frameSize);
 		_frame.setVisible(true);
 		new SelectLevel();
 		//new WelcomeScreen();
@@ -66,6 +67,9 @@ public class GUI implements WindowListener{
 			_gui = new GUI();
 		}
 		return _gui;
+	}
+	public static Dimension getFrameSize(){
+		return _frameSize;
 	}
 	public JFrame getFrame(){
 		return _frame;
