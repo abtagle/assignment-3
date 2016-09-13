@@ -5,9 +5,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import voxSpell.quiz.Lists;
 
 //import voxSpell.quiz.Lists;
 
@@ -21,7 +24,7 @@ import javax.swing.JLabel;
 
 //Must also be able to tell when the window is closing to save everything from the GUI
 public class GUI implements WindowListener{
-	public static final int NUMBER_OF_LEVELS = 11;
+	public static final int NUMBER_OF_LEVELS=11;
 	private static Dimension _frameSize;
 	private static int _level;
 	
@@ -43,6 +46,7 @@ public class GUI implements WindowListener{
 		_frame = new JFrame("VOXSPELL");
 		_frame.addWindowListener(this);
 		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Lists.getInstance().setWordList(new File("../wordlist.txt"));
 	}
 	protected void setLevel(int level){
 		_level = level;
@@ -53,7 +57,6 @@ public class GUI implements WindowListener{
 		_frame.setSize(_frameSize);
 		_frame.setVisible(true);
 		new SelectLevel();
-		//new WelcomeScreen();
 
 	}
 	public static int getLevel(){

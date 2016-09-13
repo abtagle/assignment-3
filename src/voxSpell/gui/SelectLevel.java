@@ -46,7 +46,8 @@ public class SelectLevel {
 		_panel.setLayout(gb_panel);
 
 		_selectMessage = new JLabel();
-		_selectMessage.setFont(GUI.getInstance().TITLE_FONT);
+		GUI.getInstance();
+		_selectMessage.setFont(GUI.TITLE_FONT);
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 1;
 		gbc_panel.gridwidth = 20;
@@ -88,13 +89,13 @@ public class SelectLevel {
 		_selectButton.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event) {
 			GUI.getInstance().setLevel(_selectBox.getSelectedIndex());
 			//Choose file with Level words
-			JOptionPane.showMessageDialog(null, "Please select a file to read words from", "Select a wordlist", JOptionPane.INFORMATION_MESSAGE);
+			/*JOptionPane.showMessageDialog(null, "Please select a file to read words from", "Select a wordlist", JOptionPane.INFORMATION_MESSAGE);
 		    //From: https://docs.oracle.com/javase/7/docs/api/javax/swing/JFileChooser.html
 			JFileChooser chooser = new JFileChooser();
 		    int returnVal = chooser.showOpenDialog(null);
 		    if(returnVal == JFileChooser.APPROVE_OPTION) {
 		            Lists.getInstance().setWordList(chooser.getSelectedFile());
-		    }
+		    }*/
 		    new WelcomeScreen();
 		}
 		});
@@ -104,7 +105,7 @@ public class SelectLevel {
 		BufferedImage myPicture;
 		try {
 			_image = new JLabel(" ");
-			myPicture = ImageIO.read(new File("welcomeMini.gif"));
+			myPicture = ImageIO.read(new File("./src/welcomeMini.gif"));
 			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
 			_image.add(picLabel);
 		} catch (IOException e) {
@@ -112,7 +113,6 @@ public class SelectLevel {
 			e.printStackTrace();
 		}
 		GridBagLayout gb_image = new GridBagLayout();
-		GridBagConstraints gbc_image = new GridBagConstraints();
 		_image.setLayout(gb_image);
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 2;
