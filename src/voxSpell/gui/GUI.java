@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import voxSpell.quiz.Lists;
+import voxSpell.quiz.Settings;
 
 //import voxSpell.quiz.Lists;
 
@@ -32,6 +33,7 @@ public class GUI implements WindowListener{
 	public static final Font TITLE_FONT = new Font(new JLabel().getName(), 1, 20);
 	private JFrame _frame = null;
 	private static GUI _gui = null;
+	private Settings _settings = null;
 	public static void main(String[] args) {
 	    //Schedule a job for the event-dispatching thread:
 		//creating and showing this application's GUI.	
@@ -43,6 +45,7 @@ public class GUI implements WindowListener{
 	}
 	private GUI(){
 		//Create and set up the window.
+		_settings = Settings.getInstance();
 		_frame = new JFrame("VOXSPELL");
 		_frame.addWindowListener(this);
 		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
