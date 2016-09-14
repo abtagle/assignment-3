@@ -48,7 +48,6 @@ public abstract class Quiz{
 							_wordNumberInt++;
 							_score++;
 							new SayAnything("Correct").doInBackground();
-							updateWordNumberInGUI();
 						} else{
 							_attemptNumber++;
 							new SayAnything("Incorrect. Please try again.").doInBackground();
@@ -103,6 +102,8 @@ public abstract class Quiz{
 				sayWord();
 				if(_attemptNumber == 2){
 					sayWord();
+				} else if (_attemptNumber == 1){
+					updateWordNumberInGUI();
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

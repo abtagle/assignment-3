@@ -31,10 +31,16 @@ public class Lists {
 		//Reads in all the statistics storing lists if they already  exist
 		_thisList = this;
 		
-		_mastered = readInFile(MASTERED);
+		//No need to save data between sessions for assignment 3
+		_mastered = new WordList();
+		_faulted =  new WordList();
+		_failed =  new WordList();
+		_lastFailed =  new WordList();
+		
+		/*_mastered = readInFile(MASTERED);
 		_faulted = readInFile(FAULTED);
 		_failed = readInFile(FAILED);
-		_lastFailed = readInFile(LAST_FAILED);
+		_lastFailed = readInFile(LAST_FAILED);*/
 		_scores = new ArrayList<ArrayList<Integer>>();
 		for(int i = 0; i<GUI.NUMBER_OF_LEVELS; i++){
 			_scores.add(new ArrayList<Integer>());

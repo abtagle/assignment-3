@@ -6,6 +6,9 @@ package voxSpell.gui;
 //http://www.jvider.com/
 //======================================================
 import javax.swing.JPanel;
+
+import voxSpell.quiz.Lists;
+
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -19,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 public class WelcomeScreen {
 
@@ -71,7 +75,11 @@ public class WelcomeScreen {
 		_newQuiz.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new QuizScreen("New Quiz", false);
+				if(Lists.getInstance().getWordList(GUI.getLevel()) == null || (Lists.getInstance().getWordList(GUI.getLevel()).length() == 0)){
+					JOptionPane.showMessageDialog(null, "Error: no words for New Quiz loaded. Please restart application and load a file of the correct format.", "New Quiz", JOptionPane.ERROR_MESSAGE);
+				} else{
+					new QuizScreen("New Quiz", false);
+				}
 			}
 		});
 		gbc_panel.gridx = 0;
@@ -89,7 +97,11 @@ public class WelcomeScreen {
 		_review.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new QuizScreen("Review", true);
+				if(Lists.getInstance().getLastFailed().length() == 0){
+					JOptionPane.showMessageDialog(null, "There are no words available to review. Please try starting a new quiz.", "Review", JOptionPane.ERROR_MESSAGE);
+				} else{
+					new QuizScreen("Review", true);
+	}
 			}
 		});
 		gbc_panel.gridx = 4;
@@ -181,7 +193,7 @@ public class WelcomeScreen {
 		gbc_panel.anchor = GridBagConstraints.NORTH;
 		gb_panel.setConstraints(_level, gbc_panel);
 		_panel.add(_level);
-		
+
 		GUI.getInstance().getFrame().setContentPane(_panel);
 		GUI.getInstance().getFrame().pack();
 		GUI.getInstance().getFrame().setVisible(true);

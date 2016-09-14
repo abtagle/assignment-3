@@ -30,7 +30,7 @@ public class QuizScreen{
 	JButton _repeat;
 	JButton _viewStats;
 	JButton _submit;
-	public QuizScreen(String name, boolean review) {
+	public QuizScreen(String name, boolean review){
 		GUI.getInstance().getFrame().setVisible(false);
 		_name = name;
 		_isReview = review;
@@ -133,6 +133,7 @@ public class QuizScreen{
 				_currentQuiz.checkSpelling(_spellingBar.getText());
 				_submit.setEnabled(true);
 				setEditable();
+				_spellingBar.setText("");
 			}
 			
 		});
@@ -159,7 +160,6 @@ public class QuizScreen{
 	}
 	private void setEditable(){
 		_submit.setEnabled(true);
-		_spellingBar.setText("");
 		_spellingBar.setEnabled(true);
 		_repeat.setEnabled(true);
 		_viewStats.setEnabled(true);

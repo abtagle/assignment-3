@@ -22,7 +22,7 @@ public class WordList {
 		@SuppressWarnings("unchecked")
 		ArrayList<String> shufWords = (ArrayList<String>) _words.clone();
 		Collections.shuffle(shufWords);
-		ArrayList<String> returnList = new ArrayList();
+		ArrayList<String> returnList = new ArrayList<String>();
 		int i = 0;
 		while(i < QUIZ_SIZE && i < shufWords.size()){
 			returnList.add(shufWords.get(i));

@@ -1,6 +1,7 @@
 package voxSpell.quiz;
 
 import java.io.IOException;
+import java.io.OutputStream;
 
 public class Settings {
 	static Settings _settings = null;
@@ -15,14 +16,15 @@ public class Settings {
 	private Settings(){
 		String _voiceName = "kal_diphone";
 	}
+	public void setVoice(String voiceName){
+		_voiceName = voiceName;		
+	}
 	protected String getVoice(){
 		return _voiceName;
 	}
-	public void setVoice(String voiceName){
-		 _voiceName = voiceName;
-	}
 	public void saySampleVoicePhrase(String voiceName){
-		_voiceName = voiceName;
+		String originalVoiceName = _voiceName;
+		setVoice(voiceName);
 		SayAnything sample= new SayAnything("This is the voice");
 		try {
 			sample.doInBackground();
@@ -30,6 +32,6 @@ public class Settings {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		_voiceName = voiceName;
+		setVoice(originalVoiceName);
 	}
 }

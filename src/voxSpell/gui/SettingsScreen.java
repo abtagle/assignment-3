@@ -143,6 +143,12 @@ public class SettingsScreen{
 		gbc_panel.weighty = 0;
 		gbc_panel.anchor = GridBagConstraints.NORTH;
 		gb_panel.setConstraints(_home, gbc_panel);
+		_home.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new WelcomeScreen();
+			}
+		});
 		_panel.add(_home);
 		
 		GUI.getInstance().getFrame().setContentPane(_panel);
