@@ -33,23 +33,28 @@ public class Lists {
 	private Lists(){
 		//Reads in all the statistics storing lists if they already  exist
 		_thisList = this;
-		
+
 		//No need to save data between sessions for assignment 3
 		_mastered = new WordList();
 		_faulted =  new WordList();
 		_failed =  new WordList();
 		_lastFailed =  new WordList();
-		
+
 		/*_mastered = readInFile(MASTERED);
 		_faulted = readInFile(FAULTED);
 		_failed = readInFile(FAILED);
 		_lastFailed = readInFile(LAST_FAILED);*/
-		URL url = SelectLevel.class.getResource(WORDLIST);
-		setWordList(new File(url.getPath()));
-		System.out.println(url.getPath());
-		_scores = new ArrayList<ArrayList<Integer>>();
-		for(int i = 0; i<GUI.NUMBER_OF_LEVELS; i++){
-			_scores.add(new ArrayList<Integer>());
+		//URL url = Lists.class.getResource(WORDLIST);
+		//from: stackoverflow.com/questions/15359702/get-location-of-jar-file
+		File f = new File(System.getProperty("java.class.path"));
+		File dir = f.getAbsoluteFile().getParentFile();
+		String path = dir.toString();
+
+		if(path.contains(":")){
+			URL url = Lists.class.getResource(WORDLIST);
+			setWordList(new File(url.getPath()));
+		} else{
+			setWordList(new File(path+WORDLIST));
 		}
 	}
 
@@ -111,11 +116,11 @@ public class Lists {
 			}
 		}
 	}
-	
+
 	protected void addScore(int score){
 		_scores.get(GUI.getLevel()).add(score);
 	}
-	
+
 	protected double getAverageScore(int level){
 		int total = 0;
 		if ((_scores.get(level)).size() == 0){
@@ -143,7 +148,14 @@ public class Lists {
 		return _lastFailed;
 	}
 	public int getNumberOfLevels(){
+
 		return _wordLists.size();
+	}
+	public void setUpScores(){
+		_scores = new ArrayList<ArrayList<Integer>>();
+		for(int i = 0; i<GUI.NUMBER_OF_LEVELS; i++){
+			_scores.add(new ArrayList<Integer>());
+		}
 	}
 	public void clearStats(){
 		_mastered = new WordList();

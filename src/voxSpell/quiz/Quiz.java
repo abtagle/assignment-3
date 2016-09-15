@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 import voxSpell.gui.GUI;
 import voxSpell.gui.QuizScreen;
+import voxSpell.gui.TestStats;
 
 public abstract class Quiz{
 	protected String _name;
@@ -18,10 +19,11 @@ public abstract class Quiz{
 	protected int _wordNumberInt;
 	protected QuizScreen _screen;
 
-	public Quiz(int level, QuizScreen screen){
+	public Quiz(int level, QuizScreen screen, boolean isReview){
 		_wordNumberInt = 1;
 		_attemptNumber = 1;
 		_screen = screen;
+		_isReview = isReview;
 		//check which list to get words from
 		if(_isReview){
 			_wordlist = Lists.getInstance().getLastFailed().returnTestlist();
@@ -120,11 +122,9 @@ public abstract class Quiz{
 				}
 			}
 			Lists.getInstance().addScore(_score);
-			showStats();
+			new TestStats(_score, getNumberOfWords());
 		}	
 	}
-
-	protected abstract void showStats();
 
 	protected void updateWordNumberInGUI(){
 		_screen.updateWordNumber(_wordNumberInt, _wordlist.size());

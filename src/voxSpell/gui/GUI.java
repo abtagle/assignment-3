@@ -48,6 +48,7 @@ public class GUI implements WindowListener{
 		_frame.addWindowListener(this);
 		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		NUMBER_OF_LEVELS=Lists.getInstance().getNumberOfLevels();
+		Lists.getInstance().setUpScores();
 	}
 	protected void setLevel(int level){
 		_level = level;

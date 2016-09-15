@@ -15,7 +15,7 @@ public class TestStats {
 	private JButton _home;
 	private JButton _stats;
 
-	public TestStats(int score){
+	public TestStats(int score, int total){
 		Container pane = GUI.getInstance().getContentPane();
 		pane.setVisible(false);
 		pane.setLayout(new GridLayout(5,0));
@@ -24,7 +24,7 @@ public class TestStats {
 		pane.add(_title);
 		//From: http://stackoverflow.com/questions/2715118/how-to-change-the-size-of-the-font-of-a-jlabel-to-take-the-maximum-size
 		_title.setFont(GUI.TITLE_FONT);
-		_score = new JLabel("You scored "+ score +" out of 10", JLabel.CENTER);
+		_score = new JLabel("You scored "+ score +" out of "+total, JLabel.CENTER);
 		pane.add(_score);
 		_stats = new JButton("View Stats");
 		GUI.getInstance().getFrame().getRootPane().setDefaultButton(_stats);

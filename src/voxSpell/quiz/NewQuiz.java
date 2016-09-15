@@ -1,11 +1,10 @@
 package voxSpell.quiz;
 
 import voxSpell.gui.QuizScreen;
-import voxSpell.gui.TestStats;
 
 public class NewQuiz extends Quiz {
 	public NewQuiz(int level, QuizScreen screen) {
-		super(level, screen);
+		super(level, screen, false);
 	}
 
 	@Override
@@ -14,11 +13,6 @@ public class NewQuiz extends Quiz {
 		_attemptNumber = 1;
 		updateWordNumberInGUI();
 		quizQuestion();
-	}
-
-	@Override
-	protected void showStats() {
-		new TestStats(_score);
 	}
 
 }
