@@ -7,11 +7,8 @@ package voxSpell.gui;
 //======================================================
 import javax.swing.JPanel;
 
-import com.sun.jna.platform.win32.Guid.GUID;
-
 import voxSpell.quiz.Lists;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
@@ -20,9 +17,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 
 import javax.swing.JLabel;
@@ -31,7 +25,6 @@ import javax.swing.JButton;
 public class WelcomeScreen {
 
 	private JPanel _panel;
-	private JLabel _title;
 	private JLabel _pleaseSelect;
 	private JButton _newQuiz;
 	private JButton _review;
@@ -166,7 +159,6 @@ public class WelcomeScreen {
 		_panel.add(_level);
 
 		//From http://stackoverflow.com/questions/299495/how-to-add-an-image-to-a-jpanel
-		BufferedImage myPicture;
 		_image = new JLabel("             ");
 		//from: http://stackoverflow.com/questions/25635636/eclipse-exported-runnable-jar-not-showing-images
 		URL url = SelectLevel.class.getResource("/welcomeMini.gif");

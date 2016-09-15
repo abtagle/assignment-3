@@ -7,18 +7,21 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import javax.swing.JOptionPane;
 
 import voxSpell.gui.GUI;
+import voxSpell.gui.SelectLevel;
 
 public class Lists {
 	public static final String MASTERED = ".mastered";
 	public static final String FAULTED = ".faulted";
 	public static final String FAILED = ".failed";
 	public static final String LAST_FAILED = ".lastFailed";
+	public static final String WORDLIST = "/wordlist.txt";
 	private ArrayList<WordList> _wordLists = null;
 	private WordList _mastered;
 	private WordList _faulted;
@@ -41,6 +44,9 @@ public class Lists {
 		_faulted = readInFile(FAULTED);
 		_failed = readInFile(FAILED);
 		_lastFailed = readInFile(LAST_FAILED);*/
+		URL url = SelectLevel.class.getResource(WORDLIST);
+		setWordList(new File(url.getPath()));
+		System.out.println(url.getPath());
 		_scores = new ArrayList<ArrayList<Integer>>();
 		for(int i = 0; i<GUI.NUMBER_OF_LEVELS; i++){
 			_scores.add(new ArrayList<Integer>());
@@ -135,6 +141,9 @@ public class Lists {
 	}
 	public WordList getLastFailed(){
 		return _lastFailed;
+	}
+	public int getNumberOfLevels(){
+		return _wordLists.size();
 	}
 	public void clearStats(){
 		_mastered = new WordList();

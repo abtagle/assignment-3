@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,7 +24,7 @@ import voxSpell.quiz.Settings;
 
 //Must also be able to tell when the window is closing to save everything from the GUI
 public class GUI implements WindowListener{
-	public static final int NUMBER_OF_LEVELS=11;
+	public static int NUMBER_OF_LEVELS;
 	private static Dimension _frameSize;
 	private static int _level;
 	
@@ -33,7 +32,6 @@ public class GUI implements WindowListener{
 	public static final Font TITLE_FONT = new Font(new JLabel().getName(), 1, 20);
 	private JFrame _frame = null;
 	private static GUI _gui = null;
-	private Settings _settings = null;
 	public static void main(String[] args) {
 	    //Schedule a job for the event-dispatching thread:
 		//creating and showing this application's GUI.	
@@ -45,11 +43,11 @@ public class GUI implements WindowListener{
 	}
 	private GUI(){
 		//Create and set up the window.
-		_settings = Settings.getInstance();
+		Settings.getInstance();
 		_frame = new JFrame("VOXSPELL");
 		_frame.addWindowListener(this);
 		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Lists.getInstance().setWordList(new File("../wordlist.txt"));
+		NUMBER_OF_LEVELS=Lists.getInstance().getNumberOfLevels();
 	}
 	protected void setLevel(int level){
 		_level = level;
@@ -60,6 +58,7 @@ public class GUI implements WindowListener{
 		_frame.setSize(_frameSize);
 		_frame.setVisible(true);
 		new SelectLevel();
+		//new VideoReward();
 		//new QuizScreen("New Quiz", false);
 
 	}

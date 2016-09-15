@@ -9,7 +9,6 @@ package voxSpell.gui;
 //======================================================
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -18,9 +17,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 
 import javax.swing.JLabel;
@@ -60,7 +56,7 @@ public class SelectLevel {
 		for(int i = 1; i <= GUI.NUMBER_OF_LEVELS; i++){
 			selectModel.addElement(i);
 		}
-		_selectBox = new JComboBox(selectModel);
+		_selectBox = new JComboBox<Integer>(selectModel);
 		((JLabel)_selectBox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 14;
@@ -98,7 +94,6 @@ public class SelectLevel {
 		});
 		_panel.add(_selectButton);
 		//from: http://stackoverflow.com/questions/25635636/eclipse-exported-runnable-jar-not-showing-images
-		BufferedImage myPicture;
 		URL url = SelectLevel.class.getResource("/welcomeMini.gif");
 		ImageIcon icon = new ImageIcon(url);
 		//From http://stackoverflow.com/questions/299495/how-to-add-an-image-to-a-jpanel

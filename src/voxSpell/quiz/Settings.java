@@ -1,8 +1,5 @@
 package voxSpell.quiz;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
 public class Settings {
 	static Settings _settings = null;
 	String _voiceName;

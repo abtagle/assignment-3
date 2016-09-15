@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
 
 import voxSpell.gui.GUI;
 import voxSpell.gui.QuizScreen;
