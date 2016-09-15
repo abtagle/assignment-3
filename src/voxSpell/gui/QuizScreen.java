@@ -153,12 +153,10 @@ public class QuizScreen{
 
 	}
 	private void setUneditable(){
-		_spellingBar.setEnabled(false);
 		_repeat.setEnabled(false);
 		_viewStats.setEnabled(false);
 	}
 	private void setEditable(){
-		_spellingBar.setEnabled(true);
 		_repeat.setEnabled(true);
 		_viewStats.setEnabled(true);
 	}

@@ -14,7 +14,7 @@ public class Settings {
 		
 	}
 	private Settings(){
-		String _voiceName = "kal_diphone";
+		_voiceName = "kal_diphone";
 	}
 	public void setVoice(String voiceName){
 		_voiceName = voiceName;		

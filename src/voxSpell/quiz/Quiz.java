@@ -61,7 +61,6 @@ public abstract class Quiz{
 							if(Lists.getInstance().getLastFailed().contains(_wordlist.get(_wordNumberInt-1))){
 								Lists.getInstance().getLastFailed().remove(_wordlist.get(_wordNumberInt-1));
 							}
-							_score++;
 							_attemptNumber = 1;
 							_wordNumberInt++;
 							updateWordNumberInGUI();

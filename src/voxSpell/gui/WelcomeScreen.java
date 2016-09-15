@@ -7,12 +7,15 @@ package voxSpell.gui;
 //======================================================
 import javax.swing.JPanel;
 
+import com.sun.jna.platform.win32.Guid.GUID;
+
 import voxSpell.quiz.Lists;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -20,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -46,20 +50,10 @@ public class WelcomeScreen {
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		_panel.setLayout(gb_panel);
 
-		_title = new JLabel("Welcome to voxSpell");
-		_title.setFont(GUI.TITLE_FONT);
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 0;
-		gbc_panel.gridwidth = 20;
-		gbc_panel.gridheight = 1;
-		gbc_panel.fill = GridBagConstraints.VERTICAL;
-		gbc_panel.weightx = 1;
-		gbc_panel.weighty = 1;
-		gbc_panel.anchor = GridBagConstraints.NORTH;
-		gb_panel.setConstraints(_title, gbc_panel);
-		_panel.add(_title);
 
-		_pleaseSelect = new JLabel("Select an option below");
+		_pleaseSelect = new JLabel("Level " + (GUI.getLevel()+1));
+		_pleaseSelect.setFont(GUI.TITLE_FONT);
+		_pleaseSelect.setForeground(Color.WHITE);
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy =10;
 		gbc_panel.gridwidth = 20;
@@ -101,7 +95,7 @@ public class WelcomeScreen {
 					JOptionPane.showMessageDialog(null, "There are no words available to review. Please try starting a new quiz.", "Review", JOptionPane.ERROR_MESSAGE);
 				} else{
 					new QuizScreen("Review", true);
-	}
+				}
 			}
 		});
 		gbc_panel.gridx = 4;
@@ -158,31 +152,8 @@ public class WelcomeScreen {
 		gb_panel.setConstraints(_settings, gbc_panel);
 		_panel.add(_settings);
 
-		//From http://stackoverflow.com/questions/299495/how-to-add-an-image-to-a-jpanel
-		BufferedImage myPicture;
-		try {
-			_image = new JLabel("             ");
-			myPicture = ImageIO.read(new File("./src/nasser_concept-mini.png"));
-			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-			_image.add(picLabel);
-			GridBagLayout gb_image = new GridBagLayout();
-			_image.setLayout(gb_image);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		gbc_panel.gridx = 15;
-		gbc_panel.gridy =0;
-		gbc_panel.gridwidth = 20;
-		gbc_panel.gridheight = 30;
-		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.weightx = 1;
-		gbc_panel.weighty = 1;
-		gbc_panel.anchor = GridBagConstraints.NORTH;
-		gb_panel.setConstraints(_image, gbc_panel);
-		_panel.add(_image);
-
-		_level = new JLabel("You are on Level " + (GUI.getLevel()+1));
+		_level = new JLabel("The Notorious Nasser needs your SPELLing");
+		_level.setForeground(Color.white);
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 8;
 		gbc_panel.gridwidth = 20;
@@ -193,6 +164,27 @@ public class WelcomeScreen {
 		gbc_panel.anchor = GridBagConstraints.NORTH;
 		gb_panel.setConstraints(_level, gbc_panel);
 		_panel.add(_level);
+
+		//From http://stackoverflow.com/questions/299495/how-to-add-an-image-to-a-jpanel
+		BufferedImage myPicture;
+		_image = new JLabel("             ");
+		//from: http://stackoverflow.com/questions/25635636/eclipse-exported-runnable-jar-not-showing-images
+		URL url = SelectLevel.class.getResource("/welcomeMini.gif");
+		ImageIcon icon = new ImageIcon(url);
+		JLabel picLabel = new JLabel(icon);
+		_image.add(picLabel);
+		GridBagLayout gb_image = new GridBagLayout();
+		_image.setLayout(gb_image);
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy =0;
+		gbc_panel.gridwidth = 20;
+		gbc_panel.gridheight = 30;
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.weightx = 1;
+		gbc_panel.weighty = 1;
+		gbc_panel.anchor = GridBagConstraints.NORTH;
+		gb_panel.setConstraints(_image, gbc_panel);
+		_panel.add(_image);
 
 		GUI.getInstance().getFrame().setContentPane(_panel);
 		GUI.getInstance().getFrame().pack();

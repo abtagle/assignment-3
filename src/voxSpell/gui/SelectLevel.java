@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -96,18 +97,14 @@ public class SelectLevel {
 		}
 		});
 		_panel.add(_selectButton);
-
-		//From http://stackoverflow.com/questions/299495/how-to-add-an-image-to-a-jpanel
+		//from: http://stackoverflow.com/questions/25635636/eclipse-exported-runnable-jar-not-showing-images
 		BufferedImage myPicture;
-		try {
-			_image = new JLabel(" ");
-			myPicture = ImageIO.read(new File("./src/welcomeMini.gif"));
-			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-			_image.add(picLabel);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		URL url = SelectLevel.class.getResource("/welcomeMini.gif");
+		ImageIcon icon = new ImageIcon(url);
+		//From http://stackoverflow.com/questions/299495/how-to-add-an-image-to-a-jpanel
+		_image = new JLabel(" ");
+		JLabel picLabel = new JLabel(icon);
+		_image.add(picLabel);
 		GridBagLayout gb_image = new GridBagLayout();
 		_image.setLayout(gb_image);
 		gbc_panel.gridx = 0;

@@ -8,6 +8,7 @@ package voxSpell.gui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -94,9 +95,9 @@ public class VideoReward {
         frame.setLocation(100, 100);
         frame.setSize(1050, 600);
         frame.setVisible(true);
-
-        String filename = "big_buck_bunny_1_minute.avi";
-        video.playMedia(filename);
+        URL url = SelectLevel.class.getResource("/big_buck_bunny_1_minute.avi");
+        //String filename = "big_buck_bunny_1_minute.avi";
+        video.playMedia(url.getPath());
         NativeLibrary.addSearchPath(
                 RuntimeUtil.getLibVlcLibraryName(), "/Applications/vlc-2.0.0/VLC.app/Contents/MacOS/lib"
             );
