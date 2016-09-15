@@ -26,12 +26,7 @@ public class Settings {
 		String originalVoiceName = _voiceName;
 		setVoice(voiceName);
 		SayAnything sample= new SayAnything("This is the voice");
-		try {
-			sample.doInBackground();
-		} catch (IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		sample.doInBackground();
 		setVoice(originalVoiceName);
 	}
 }

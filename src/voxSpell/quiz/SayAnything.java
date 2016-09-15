@@ -1,7 +1,9 @@
 package voxSpell.quiz;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 
 import javax.swing.SwingWorker;
 
@@ -12,15 +14,38 @@ class SayAnything extends SwingWorker<Void, Void>{
 	Process _process;
 	public SayAnything(String anything){
 		_phrase = anything;
+		//Create the .scm file
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter(".say.scm");
+			writer.println("(voice_" + Settings.getInstance().getVoice() + ") ;;");
+			writer.println("(SayText \"" + _phrase + "\")");
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	protected Void doInBackground() throws IOException, InterruptedException {
+	protected Void doInBackground(){
+		ProcessBuilder sayBuilder = new ProcessBuilder("/bin/bash", "-c", "festival -b .say.scm");
+		try {
+			_process = sayBuilder.start();
+			_process.waitFor();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		//executeCommand("festival; (" + Settings.getInstance().getVoice() + "); (SayText \"" + _phrase + "\"); (exit)");
-		String sayCommand = "echo " + _phrase + "." + " | festival --tts";
+		/*String sayCommand = "echo " + _phrase + "." + " | festival --tts";
 		ProcessBuilder sayBuilder = new ProcessBuilder("/bin/bash", "-c", sayCommand);
 		_process = sayBuilder.start();
-		_process.waitFor();
+		_process.waitFor();*/
 		//Adapted from http://www.hiteshagrawal.com/java/text-to-speech-tts-in-java/
 		/*Runtime rt = Runtime.getRuntime();
 		Process process = rt.exec("festival --pipe");
