@@ -16,6 +16,7 @@ import voxSpell.quiz.Settings;
 
 /**
  * Assignment 2 for Softeng 206- creating a GUI spelling aid
+ * Updated for assignment 3 (so we don't save word lists we can't really use)
  * 
  * @author atag549
  * Modified 06/09/16

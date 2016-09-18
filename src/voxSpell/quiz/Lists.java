@@ -14,7 +14,14 @@ import java.util.Collections;
 import javax.swing.JOptionPane;
 
 import voxSpell.gui.GUI;
-import voxSpell.gui.SelectLevel;
+
+/**
+ * Class representing an almost database of all the lists of words used, allowing access to all of them throughout
+ * the voxSpell.gui package
+ * @author atag549
+ * Last Modified: 18 September, 2016
+ *
+ */
 
 public class Lists {
 	public static final String MASTERED = ".mastered";

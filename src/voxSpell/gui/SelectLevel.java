@@ -7,6 +7,15 @@ package voxSpell.gui;
 //Modified by Aimee Tagle 13/09/2016
 //		Made to actually fit purpose- tool just used to get components in correct position
 //======================================================
+
+/**
+ * 
+ * Class developed for Assignment 3 of Softeng 206
+ * User Interface for selecting the level the player wishes to start voxSpell on
+ * 
+ * @author: atag549
+ * Last Modified: 18 September, 2016
+ */
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.BorderFactory;

@@ -1,9 +1,6 @@
 
 package voxSpell.gui;
 
-/*
- * Example downloaded from the 
- */
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -25,10 +22,11 @@ import com.sun.jna.NativeLibrary;
 
 
 /**
- * Class taken from ACP and modified
+ * Class taken from ACP and modified to meet specification for Assignment 3 of Softeng 206
+ * Video player to display the video reward
  * 
+ * @author  Nasser Giacaman, Caprica, atag549
  * Last Modified: 8 September. 2016
- * Author: Nasser Giacaman, Caprica, Aimee Tagle (atag549)
  *
  */
 public class VideoReward{
