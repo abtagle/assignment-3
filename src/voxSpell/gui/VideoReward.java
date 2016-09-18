@@ -5,6 +5,8 @@ package voxSpell.gui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.net.URL;
 
 import javax.swing.JButton;
@@ -26,90 +28,115 @@ import com.sun.jna.NativeLibrary;
  * Video player to display the video reward
  * 
  * @author  Nasser Giacaman, Caprica, atag549
- * Last Modified: 8 September. 2016
+ * Last Modified: 8 September, 2016
  *
  */
-public class VideoReward{
-	
-    private final EmbeddedMediaPlayerComponent mediaPlayerComponent;
-    private final EmbeddedMediaPlayer _video;
-    public VideoReward() {
-        JFrame frame = new JFrame("Video Reward");
+public class VideoReward implements WindowListener{
+	EmbeddedMediaPlayer _video;
 
-        mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
+	private final EmbeddedMediaPlayerComponent mediaPlayerComponent;
 
-        _video = mediaPlayerComponent.getMediaPlayer();
-        
-        frame.setContentPane(mediaPlayerComponent);
+	public VideoReward() {
+		JFrame frame = new JFrame("Video Reward");
 
-        frame.setLocation(100, 100);
-        frame.setSize(1050, 600);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.add(mediaPlayerComponent, BorderLayout.CENTER);
-        frame.setContentPane(panel);
-        _video.canPause();
-        
-        JButton btnMute = new JButton("Mute");
-        panel.add(btnMute, BorderLayout.NORTH);
-        btnMute.addActionListener(new ActionListener() {
+		mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
+
+		_video = mediaPlayerComponent.getMediaPlayer();
+
+		frame.setContentPane(mediaPlayerComponent);
+
+		frame.setLocation(100, 100);
+		frame.setSize(1050, 600);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		JPanel panel = new JPanel(new BorderLayout());
+		panel.add(mediaPlayerComponent, BorderLayout.CENTER);
+		frame.setContentPane(panel);
+		_video.canPause();
+
+		JButton btnMute = new JButton("Mute");
+		panel.add(btnMute, BorderLayout.NORTH);
+		btnMute.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				_video.mute();
 			}
 		});
-        
-        JButton btnPause = new JButton("Pause");
-        btnPause.addActionListener(new ActionListener() {
+
+
+		JButton btnPause = new JButton("Pause");
+		btnPause.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				pause();
 			}
 		});
-        panel.add(btnPause, BorderLayout.SOUTH);
-        
-        JButton btnStop = new JButton("Stop");
-        btnPause.addActionListener(new ActionListener() {
+		panel.add(btnPause, BorderLayout.SOUTH);
+
+		frame.setLocation(100, 100);
+		frame.setSize(1050, 600);
+		frame.setVisible(true);
+		URL url = SelectLevel.class.getResource("/big_buck_bunny_1_minute.avi");
+		//String filename = "big_buck_bunny_1_minute.avi";
+		_video.playMedia(url.getPath());
+		NativeLibrary.addSearchPath(
+				RuntimeUtil.getLibVlcLibraryName(), "/Applications/vlc-2.0.0/VLC.app/Contents/MacOS/lib"
+				);
+		Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+
+		SwingUtilities.invokeLater(new Runnable() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				stop();
+			public void run() {
 			}
 		});
-        panel.add(btnStop, BorderLayout.LINE_END);
-        
-        frame.setLocation(100, 100);
-        frame.setSize(1050, 600);
-        frame.setVisible(true);
-        URL url = SelectLevel.class.getResource("/big_buck_bunny_1_minute.avi");
-        //String filename = "big_buck_bunny_1_minute.avi";
-        _video.playMedia(url.getPath());
-        NativeLibrary.addSearchPath(
-                RuntimeUtil.getLibVlcLibraryName(), "/Applications/vlc-2.0.0/VLC.app/Contents/MacOS/lib"
-            );
-            Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
-            
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                }
-            });
-    }
-    
-    private void hardPause(){
-    	_video.pause();
-    }
-    
-    private void pause(){
+	}
+
+	private void pause(){
 		if(_video.isPlaying()){
 			_video.getMediaPlayerState();
 		} else {
 			_video.play();
 		}
 	}
-    
-    private void stop(){
-    	hardPause();
-    	_video.stop();
-    }
+
+	@Override
+	public void windowActivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		_video.stop();
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
