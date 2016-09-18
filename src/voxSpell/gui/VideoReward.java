@@ -67,7 +67,7 @@ public class VideoReward implements WindowListener{
 		btnPause.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				pause();
+				_video.pause();
 			}
 		});
 		panel.add(btnPause, BorderLayout.SOUTH);

@@ -112,6 +112,12 @@ public class WelcomeScreen {
 		gbc_panel.weighty = 0;
 		gbc_panel.anchor = GridBagConstraints.NORTH;
 		gb_panel.setConstraints(_viewStats, gbc_panel);
+		_viewStats.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new GUIStats();
+			}
+		});
 		_panel.add(_viewStats);
 
 		_clearStats = new JButton("Clear Stats");

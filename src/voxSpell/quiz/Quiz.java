@@ -48,16 +48,16 @@ public abstract class Quiz{
 							}
 							_wordNumberInt++;
 							_score++;
-							new SayAnything("Correct").doInBackground();
+							new SayAnything("Correct").execute();
 						} else{
 							_attemptNumber++;
-							new SayAnything("Incorrect. Please try again.").doInBackground();
+							new SayAnything("Incorrect. Please try again.").execute();
 						}
 						quizQuestion();
 						//Second attempt- failed or faulted
 					} else if (_attemptNumber == 2){
 						if(spelling.equals(_wordlist.get(_wordNumberInt-1).toLowerCase())){
-							new SayAnything("Correct").doInBackground();
+							new SayAnything("Correct").execute();
 							Lists.getInstance().getFaulted().addWord(_wordlist.get(_wordNumberInt-1));
 							if(Lists.getInstance().getLastFailed().contains(_wordlist.get(_wordNumberInt-1))){
 								Lists.getInstance().getLastFailed().remove(_wordlist.get(_wordNumberInt-1));
@@ -67,7 +67,7 @@ public abstract class Quiz{
 							updateWordNumberInGUI();
 							quizQuestion();
 						} else{
-							new SayAnything("Incorrect.").doInBackground();
+							new SayAnything("Incorrect.").execute();
 							Lists.getInstance().getFailed().addWord(_wordlist.get(_wordNumberInt-1));
 							if(Lists.getInstance().getLastFailed().contains(_wordlist.get(_wordNumberInt-1))==false){
 								Lists.getInstance().getLastFailed().addWord(_wordlist.get(_wordNumberInt-1));
@@ -77,9 +77,9 @@ public abstract class Quiz{
 						//Third attempt for review - no change to word status
 					} else{
 						if(spelling.equals(_wordlist.get(_wordNumberInt-1).toLowerCase())){
-							new SayAnything("Correct").doInBackground();
+							new SayAnything("Correct").execute();
 						} else{
-							new SayAnything("Incorrect").doInBackground();
+							new SayAnything("Incorrect").execute();
 						}
 						_attemptNumber = 1;
 						_wordNumberInt++;
@@ -144,7 +144,7 @@ public abstract class Quiz{
 	public void sayWord(){
 		SayAnything word = new SayAnything(_wordlist.get(_wordNumberInt-1));
 		try {
-			word.doInBackground();
+			word.execute();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

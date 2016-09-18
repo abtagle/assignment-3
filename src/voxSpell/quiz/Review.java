@@ -12,15 +12,15 @@ public class Review extends Quiz {
 		_attemptNumber = 3;
 		char[] wordAsCharArray = _wordlist.get(_wordNumberInt-1).toCharArray();
 		try {
-			new SayAnything(_wordlist.get(_wordNumberInt-1)+" is spelt.").doInBackground();
+			new SayAnything(_wordlist.get(_wordNumberInt-1)+" is spelt.").execute();
 			for(char i : wordAsCharArray){
 				if(i=='a'){
-					new SayAnything("ay").doInBackground();
+					new SayAnything("ay").execute();
 				} else {
-					new SayAnything(i+"").doInBackground();
+					new SayAnything(i+"").execute();
 				}
 			}
-			new SayAnything("Please spell").doInBackground();
+			new SayAnything("Please spell").execute();
 			quizQuestion();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

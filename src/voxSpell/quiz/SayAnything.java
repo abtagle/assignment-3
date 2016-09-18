@@ -31,7 +31,8 @@ class SayAnything extends SwingWorker<Void, Void>{
 		ProcessBuilder sayBuilder = new ProcessBuilder("/bin/bash", "-c", "festival -b .say.scm");
 		try {
 			_process = sayBuilder.start();
-			_process.waitFor();
+			//_process.waitFor();
+			Thread.sleep(1000);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,5 +58,7 @@ class SayAnything extends SwingWorker<Void, Void>{
 		return null;
 	}
 	
-
+	protected void setPhrase(String phrase){
+		_phrase = phrase;
+	}
 }

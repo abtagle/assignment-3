@@ -47,6 +47,7 @@ public class QuizScreen{
 		GUI.getInstance().getFrame().pack();
 		GUI.getInstance().getFrame().setVisible(true);
 		GUI.getInstance().getFrame().getRootPane().setDefaultButton(_submit);
+		_currentQuiz.sayWord();
 		_currentQuiz.quizQuestion();
 	} 
 	private void addComponents(){

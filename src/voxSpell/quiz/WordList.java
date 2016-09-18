@@ -45,4 +45,7 @@ public class WordList {
 	public int frequencyOf(String word){
 		return Collections.frequency(_words, word);
 	}
+	public String getWord(int i){
+		return _words.get(i);
+	}
 }
