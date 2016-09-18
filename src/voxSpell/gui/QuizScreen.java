@@ -15,11 +15,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class QuizScreen{
-
 	private String _name;
 	private boolean _isReview;
 	private Quiz _currentQuiz;
@@ -27,9 +27,10 @@ public class QuizScreen{
 	JLabel _progressWords;
 	JTextField _spellingBar;
 	JLabel _spellBelow;
-	JButton _repeat;
-	JButton _viewStats;
-	JButton _submit;
+	private JButton _repeat;
+	private JButton _viewStats;
+	private JButton _submit;
+	private JButton _menu;
 	public QuizScreen(String name, boolean review){
 		GUI.getInstance().getFrame().setVisible(false);
 		_name = name;
@@ -53,7 +54,31 @@ public class QuizScreen{
 		GridBagLayout gb_panel = new GridBagLayout();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		_panel.setLayout(gb_panel);
+		
+		_menu = new JButton("Return to Menu");
+		
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 0;
+		gbc_panel.gridwidth = 20;
+		gbc_panel.gridheight = 2;
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.weightx = 1;
+		gbc_panel.weighty = 0;
+		gbc_panel.anchor = GridBagConstraints.NORTH;
+		gb_panel.setConstraints(_menu, gbc_panel);
+		_menu.addActionListener(new ActionListener(){
 
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to leave this quiz? All quiz progress will be lost.","Exit qo Main Menu", JOptionPane.YES_NO_OPTION);
+				if (reply == JOptionPane.YES_OPTION) {
+					new WelcomeScreen();
+				}
+			}
+			
+		});
+		_panel.add(_menu);
+		
 		_progressWords = new JLabel();
 		updateWordNumber(1, _currentQuiz.getNumberOfWords());
 		gbc_panel.gridx = 0;
