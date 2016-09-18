@@ -106,6 +106,7 @@ public class VideoReward implements WindowListener{
 
 	@Override
 	public void windowClosed(WindowEvent e) {
+		_video.pause();
 		_video.stop();
 	}
 
@@ -117,7 +118,8 @@ public class VideoReward implements WindowListener{
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {
-		// TODO Auto-generated method stub
+		_video.pause();
+		_video.stop();
 		
 	}
 

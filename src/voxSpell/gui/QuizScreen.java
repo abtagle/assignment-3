@@ -70,7 +70,7 @@ public class QuizScreen{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to leave this quiz? All quiz progress will be lost.","Exit qo Main Menu", JOptionPane.YES_NO_OPTION);
+				int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to leave this quiz? All quiz progress will be lost.","Exit Quiz",  JOptionPane.YES_NO_OPTION);
 				if (reply == JOptionPane.YES_OPTION) {
 					new WelcomeScreen();
 				}

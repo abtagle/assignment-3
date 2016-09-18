@@ -127,7 +127,7 @@ public abstract class Quiz{
 	}
 
 	protected void updateWordNumberInGUI(){
-		_screen.updateWordNumber(_wordNumberInt, _wordlist.size());
+		_screen.updateWordNumber(_wordNumberInt, _wordlist.size()); 
 	}
 
 	//Returns true if string has characters which are not letters
