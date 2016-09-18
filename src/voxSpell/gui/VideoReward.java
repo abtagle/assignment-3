@@ -31,16 +31,16 @@ import com.sun.jna.NativeLibrary;
  * Author: Nasser Giacaman, Caprica, Aimee Tagle (atag549)
  *
  */
-public class VideoReward {
+public class VideoReward{
 	
     private final EmbeddedMediaPlayerComponent mediaPlayerComponent;
-  
+    private final EmbeddedMediaPlayer _video;
     public VideoReward() {
         JFrame frame = new JFrame("Video Reward");
 
         mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
 
-        final EmbeddedMediaPlayer video = mediaPlayerComponent.getMediaPlayer();
+        _video = mediaPlayerComponent.getMediaPlayer();
         
         frame.setContentPane(mediaPlayerComponent);
 
@@ -50,54 +50,41 @@ public class VideoReward {
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(mediaPlayerComponent, BorderLayout.CENTER);
         frame.setContentPane(panel);
-        video.canPause();
+        _video.canPause();
         
         JButton btnMute = new JButton("Mute");
         panel.add(btnMute, BorderLayout.NORTH);
         btnMute.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				video.mute();
+				_video.mute();
 			}
 		});
-        
-        JButton btnSkip = new JButton(">>");
-        btnSkip.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				video.skip(5000);
-			}
-		});
-        panel.add(btnSkip, BorderLayout.EAST);
-
-        JButton btnSkipBack = new JButton("<<");
-        btnSkipBack.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				video.skip(-5000);
-			}
-		});
-        panel.add(btnSkipBack, BorderLayout.WEST);
         
         JButton btnPause = new JButton("Pause");
         btnPause.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(video.isPlaying()){
-					video.pause();
-				} else {
-					video.play();
-				}
+				pause();
 			}
 		});
         panel.add(btnPause, BorderLayout.SOUTH);
+        
+        JButton btnStop = new JButton("Stop");
+        btnPause.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				stop();
+			}
+		});
+        panel.add(btnStop, BorderLayout.LINE_END);
         
         frame.setLocation(100, 100);
         frame.setSize(1050, 600);
         frame.setVisible(true);
         URL url = SelectLevel.class.getResource("/big_buck_bunny_1_minute.avi");
         //String filename = "big_buck_bunny_1_minute.avi";
-        video.playMedia(url.getPath());
+        _video.playMedia(url.getPath());
         NativeLibrary.addSearchPath(
                 RuntimeUtil.getLibVlcLibraryName(), "/Applications/vlc-2.0.0/VLC.app/Contents/MacOS/lib"
             );
@@ -108,6 +95,23 @@ public class VideoReward {
                 public void run() {
                 }
             });
+    }
+    
+    private void hardPause(){
+    	_video.pause();
+    }
+    
+    private void pause(){
+		if(_video.isPlaying()){
+			_video.getMediaPlayerState();
+		} else {
+			_video.play();
+		}
+	}
+    
+    private void stop(){
+    	hardPause();
+    	_video.stop();
     }
 
 }
