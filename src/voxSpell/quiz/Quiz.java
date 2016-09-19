@@ -53,6 +53,7 @@ public abstract class Quiz{
 							_wordNumberInt++;
 							_score++;
 							sayPhrase("Correct. " +_wordlist.get(_wordNumberInt-1) + ".");
+							//sayPhrase(_wordlist.get(_wordNumberInt-1));
 						} else{
 							_attemptNumber++;
 							sayPhrase("Incorrect. Please try again. "+_wordlist.get(_wordNumberInt-1) + ".");
@@ -80,9 +81,9 @@ public abstract class Quiz{
 						//Third attempt for review - no change to word status
 					} else{
 						if(spelling.equals(_wordlist.get(_wordNumberInt-1).toLowerCase())){
-							sayPhrase("Correct." +_wordlist.get(_wordNumberInt-1) + "." );
+							sayPhrase("Correct. " +_wordlist.get(_wordNumberInt) + "." );
 						} else{
-							sayPhrase("Correct"+_wordlist.get(_wordNumberInt-1) + ".");
+							sayPhrase("Incorrect. "+_wordlist.get(_wordNumberInt) + ".");
 						}
 						_attemptNumber = 1;
 						_wordNumberInt++;
@@ -117,7 +118,7 @@ public abstract class Quiz{
 			if(_isReview == false){
 				if(_score >= 9 && GUI.getLevel()!=GUI.NUMBER_OF_LEVELS){
 					//From http://stackoverflow.com/questions/8396870/joptionpane-yes-or-no-window
-					int reply = JOptionPane.showConfirmDialog(null, "Congratulations! You scored " + _score + " out of " + _wordlist.size() + ". Would you like to LEVEL UP?", "Level up!", JOptionPane.YES_NO_OPTION);
+					int reply = JOptionPane.showConfirmDialog(null, "Congratulations! You scored " + _score + " out of " + (_wordlist.size()-1) + ". Would you like to LEVEL UP?", "Level up!", JOptionPane.YES_NO_OPTION);
 					if (reply == JOptionPane.YES_OPTION) {
 						GUI.increaseLevel();
 						JOptionPane.showMessageDialog(null, "You have now LEVELED UP", "Level up!", JOptionPane.INFORMATION_MESSAGE);

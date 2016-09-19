@@ -5,8 +5,6 @@ package voxSpell.gui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.net.URL;
 
 import javax.swing.JButton;
@@ -31,26 +29,26 @@ import com.sun.jna.NativeLibrary;
  * Last Modified: 8 September, 2016
  *
  */
-public class VideoReward implements WindowListener{
+public class VideoReward extends JFrame{
 	EmbeddedMediaPlayer _video;
 
 	private final EmbeddedMediaPlayerComponent mediaPlayerComponent;
 
 	public VideoReward() {
-		JFrame frame = new JFrame("Video Reward");
+		super("Video Reward");
 
 		mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
 
 		_video = mediaPlayerComponent.getMediaPlayer();
 
-		frame.setContentPane(mediaPlayerComponent);
+		setContentPane(mediaPlayerComponent);
 
-		frame.setLocation(100, 100);
-		frame.setSize(1050, 600);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setLocation(100, 100);
+		setSize(1050, 600);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(mediaPlayerComponent, BorderLayout.CENTER);
-		frame.setContentPane(panel);
+		setContentPane(panel);
 		_video.canPause();
 
 		JButton btnMute = new JButton("Mute");
@@ -67,14 +65,14 @@ public class VideoReward implements WindowListener{
 		btnPause.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				_video.pause();
+				pause();
 			}
 		});
 		panel.add(btnPause, BorderLayout.SOUTH);
 
-		frame.setLocation(100, 100);
-		frame.setSize(1050, 600);
-		frame.setVisible(true);
+		setLocation(100, 100);
+		setSize(1050, 600);
+		setVisible(true);
 		URL url = SelectLevel.class.getResource("/big_buck_bunny_1_minute.avi");
 		//String filename = "big_buck_bunny_1_minute.avi";
 		_video.playMedia(url.getPath());
@@ -89,56 +87,19 @@ public class VideoReward implements WindowListener{
 			}
 		});
 	}
-
+	
+	@Override
+	public void dispose(){
+		_video.pause();
+		_video.stop();
+		super.dispose();
+	}
 	private void pause(){
 		if(_video.isPlaying()){
-			_video.getMediaPlayerState();
+			_video.pause();
 		} else {
 			_video.play();
 		}
-	}
-
-	@Override
-	public void windowActivated(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowClosed(WindowEvent e) {
-		_video.pause();
-		_video.stop();
-	}
-
-	@Override
-	public void windowClosing(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowDeactivated(WindowEvent e) {
-		_video.pause();
-		_video.stop();
-		
-	}
-
-	@Override
-	public void windowDeiconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowIconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

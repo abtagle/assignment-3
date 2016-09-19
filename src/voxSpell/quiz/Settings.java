@@ -23,7 +23,7 @@ public class Settings {
 		String originalVoiceName = _voiceName;
 		setVoice(voiceName);
 		SayAnything sample= new SayAnything("This is the voice");
-		sample.doInBackground();
+		sample.execute();
 		setVoice(originalVoiceName);
 	}
 }
