@@ -1,6 +1,8 @@
 package voxSpell.quiz;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -18,8 +20,10 @@ public abstract class Quiz{
 	protected int _attemptNumber;
 	protected int _wordNumberInt;
 	protected QuizScreen _screen;
+	private ExecutorService _threadPool;
 
 	public Quiz(int level, QuizScreen screen, boolean isReview){
+		_threadPool = Executors.newFixedThreadPool(1);
 		_wordNumberInt = 1;
 		_attemptNumber = 1;
 		_screen = screen;
@@ -48,10 +52,12 @@ public abstract class Quiz{
 							}
 							_wordNumberInt++;
 							_score++;
-							new SayAnything("Correct. " + _wordlist.get(_wordNumberInt-1)).execute();
+							sayPhrase("Correct.");
+							sayWord();
 						} else{
 							_attemptNumber++;
-							new SayAnything("Incorrect. Please try again. " + _wordlist.get(_wordNumberInt-1)).execute();
+							sayPhrase("Incorrect. Please try again.");
+							sayWord();
 						}
 						quizQuestion();
 						//Second attempt- failed or faulted
@@ -96,7 +102,7 @@ public abstract class Quiz{
 	}
 	public final void quizQuestion(){
 		//Only quiz if there are words left to quiz
-		if(_wordNumberInt <=_wordlist.size()){
+		if(_wordNumberInt <_wordlist.size()){
 			/*try {
 				sayWord();
 				if(_attemptNumber == 2){
@@ -139,15 +145,14 @@ public abstract class Quiz{
 		}
 		return false;
 	}
-
+	
+	protected void sayPhrase(String phrase){
+		SayAnything anything = new SayAnything(phrase);
+		_threadPool.execute(anything);
+	}
+	
 	public void sayWord(){
-		SayAnything word = new SayAnything(_wordlist.get(_wordNumberInt-1));
-		try {
-			word.execute();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		_threadPool.execute(new SayAnything(_wordlist.get(_wordNumberInt-1)));
 	}
 
 	/*

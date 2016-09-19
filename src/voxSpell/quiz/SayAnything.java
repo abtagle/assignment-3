@@ -32,7 +32,6 @@ class SayAnything extends SwingWorker<Void, Void>{
 		try {
 			_process = sayBuilder.start();
 			_process.waitFor();
-			//Thread.sleep(1000);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

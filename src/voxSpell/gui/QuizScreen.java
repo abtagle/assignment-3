@@ -187,6 +187,6 @@ public class QuizScreen{
 		_viewStats.setEnabled(true);
 	}
 	public void updateWordNumber(int number, int total){
-		_progressWords.setText("Word " + number+ " of " + _currentQuiz.getNumberOfWords());
+		_progressWords.setText("Word " + number+ " of " + (_currentQuiz.getNumberOfWords()-1));
 	}
 } 
