@@ -7,20 +7,24 @@ public class Review extends Quiz {
 	public Review(int level, QuizScreen screen) {
 		super(level, screen, true);
 	}
-	//hook method implemented to spell word aloud if the word is failed, and give another opportunity to spell it
+
+	// hook method implemented to spell word aloud if the word is failed, and
+	// give another opportunity to spell it
 	protected void spellAloud(String word) {
 		_attemptNumber = 3;
-		char[] wordAsCharArray = _wordlist.get(_wordNumberInt-1).toCharArray();
+		char[] wordAsCharArray = _wordlist.get(_wordNumberInt - 1).toCharArray();
+		StringBuilder say = new StringBuilder();
+		say.append("Incorrect." + _wordlist.get(_wordNumberInt - 1) + " is spelt.");
 		try {
-			new SayAnything(_wordlist.get(_wordNumberInt-1)+" is spelt.").execute();
-			for(char i : wordAsCharArray){
-				if(i=='a'){
-					new SayAnything("ay").execute();
+			for (char i : wordAsCharArray) {
+				if (i == 'a') {
+					say.append(" ay");
 				} else {
-					new SayAnything(i+"").execute();
+					say.append(" " + i);
 				}
 			}
-			new SayAnything("Please spell").execute();
+			say.append(". Please spell " + _wordlist.get(_wordNumberInt - 1));
+			new SayAnything(say.toString());
 			quizQuestion();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -29,4 +33,3 @@ public class Review extends Quiz {
 	}
 
 }
-

@@ -48,16 +48,16 @@ public abstract class Quiz{
 							}
 							_wordNumberInt++;
 							_score++;
-							new SayAnything("Correct").execute();
+							new SayAnything("Correct. " + _wordlist.get(_wordNumberInt-1)).execute();
 						} else{
 							_attemptNumber++;
-							new SayAnything("Incorrect. Please try again.").execute();
+							new SayAnything("Incorrect. Please try again. " + _wordlist.get(_wordNumberInt-1)).execute();
 						}
 						quizQuestion();
 						//Second attempt- failed or faulted
 					} else if (_attemptNumber == 2){
 						if(spelling.equals(_wordlist.get(_wordNumberInt-1).toLowerCase())){
-							new SayAnything("Correct").execute();
+							new SayAnything("Correct. " + _wordlist.get(_wordNumberInt)).execute();
 							Lists.getInstance().getFaulted().addWord(_wordlist.get(_wordNumberInt-1));
 							if(Lists.getInstance().getLastFailed().contains(_wordlist.get(_wordNumberInt-1))){
 								Lists.getInstance().getLastFailed().remove(_wordlist.get(_wordNumberInt-1));
@@ -67,7 +67,6 @@ public abstract class Quiz{
 							updateWordNumberInGUI();
 							quizQuestion();
 						} else{
-							new SayAnything("Incorrect.").execute();
 							Lists.getInstance().getFailed().addWord(_wordlist.get(_wordNumberInt-1));
 							if(Lists.getInstance().getLastFailed().contains(_wordlist.get(_wordNumberInt-1))==false){
 								Lists.getInstance().getLastFailed().addWord(_wordlist.get(_wordNumberInt-1));
@@ -98,17 +97,17 @@ public abstract class Quiz{
 	public final void quizQuestion(){
 		//Only quiz if there are words left to quiz
 		if(_wordNumberInt <=_wordlist.size()){
-			try {
+			/*try {
 				sayWord();
 				if(_attemptNumber == 2){
 					sayWord();
-				} else if (_attemptNumber == 1){
+				} else */if (_attemptNumber == 1){
 					updateWordNumberInGUI();
 				}
-			} catch (Exception e) {
+			/*} catch (Exception e) {
 				e.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Error saying word", "Quiz Error", JOptionPane.ERROR_MESSAGE);
-			}
+			}*/
 			//If there are no words left to quiz, show results
 		} else {
 			if(_isReview == false){
