@@ -1,2 +1,2 @@
 (voice_kal_diphone) ;;
-(SayText "Correct.it.")
+(SayText "Incorrect. I is spelt. I.. Please spell I")

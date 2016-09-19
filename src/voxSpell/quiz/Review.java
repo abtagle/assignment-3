@@ -18,9 +18,9 @@ public class Review extends Quiz {
 		try {
 			for (char i : wordAsCharArray) {
 				if (i == 'a') {
-					say.append(" ay");
+					say.append(" ay.");
 				} else {
-					say.append(" " + i);
+					say.append(" " + i + ".");
 				}
 			}
 			say.append(". Please spell " + _wordlist.get(_wordNumberInt - 1));
