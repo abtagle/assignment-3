@@ -52,17 +52,16 @@ public abstract class Quiz{
 							}
 							_wordNumberInt++;
 							_score++;
-							sayPhrase("Correct. " +_wordlist.get(_wordNumberInt-1) + ".");
-							//sayPhrase(_wordlist.get(_wordNumberInt-1));
+							sayPhrase("Correct.");
 						} else{
 							_attemptNumber++;
-							sayPhrase("Incorrect. Please try again. "+_wordlist.get(_wordNumberInt-1) + ".");
+							sayPhrase("Incorrect. Please try again.");
 						}
 						quizQuestion();
 						//Second attempt- failed or faulted
 					} else if (_attemptNumber == 2){
 						if(spelling.equals(_wordlist.get(_wordNumberInt-1).toLowerCase())){
-							sayPhrase("Correct. " + _wordlist.get(_wordNumberInt) + ".");
+							sayPhrase("Correct. ");
 							Lists.getInstance().getFaulted().addWord(_wordlist.get(_wordNumberInt-1));
 							if(Lists.getInstance().getLastFailed().contains(_wordlist.get(_wordNumberInt-1))){
 								Lists.getInstance().getLastFailed().remove(_wordlist.get(_wordNumberInt-1));
@@ -81,9 +80,9 @@ public abstract class Quiz{
 						//Third attempt for review - no change to word status
 					} else{
 						if(spelling.equals(_wordlist.get(_wordNumberInt-1).toLowerCase())){
-							sayPhrase("Correct. " +_wordlist.get(_wordNumberInt) + "." );
+							sayPhrase("Correct.");
 						} else{
-							sayPhrase("Incorrect. "+_wordlist.get(_wordNumberInt) + ".");
+							sayPhrase("Incorrect.");
 						}
 						_attemptNumber = 1;
 						_wordNumberInt++;
@@ -101,18 +100,17 @@ public abstract class Quiz{
 	}
 	public final void quizQuestion(){
 		//Only quiz if there are words left to quiz
-		if(_wordNumberInt <_wordlist.size()){
-			/*try {
+		if(_wordNumberInt< _wordlist.size()+1){
+			try {
 				sayWord();
-				if(_attemptNumber == 2){
-					sayWord();
-				} else */if (_attemptNumber == 1){
+
+				if (_attemptNumber == 1){
 					updateWordNumberInGUI();
 				}
-			/*} catch (Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Error saying word", "Quiz Error", JOptionPane.ERROR_MESSAGE);
-			}*/
+			}
 			//If there are no words left to quiz, show results
 		} else {
 			if(_isReview == false){
@@ -151,7 +149,7 @@ public abstract class Quiz{
 	}
 	
 	public void sayWord(){
-		_threadPool.execute(new SayAnything(_wordlist.get(_wordNumberInt-1)));
+		_threadPool.execute(new SayAnything(_wordlist.get(_wordNumberInt-1), true));
 	}
 
 	/*

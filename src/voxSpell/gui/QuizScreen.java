@@ -47,7 +47,6 @@ public class QuizScreen{
 		GUI.getInstance().getFrame().pack();
 		GUI.getInstance().getFrame().setVisible(true);
 		GUI.getInstance().getFrame().getRootPane().setDefaultButton(_submit);
-		_currentQuiz.sayWord();
 		_currentQuiz.quizQuestion();
 	} 
 	private void addComponents(){
@@ -187,6 +186,6 @@ public class QuizScreen{
 		_viewStats.setEnabled(true);
 	}
 	public void updateWordNumber(int number, int total){
-		_progressWords.setText("Word " + number+ " of " + (_currentQuiz.getNumberOfWords()-1));
+		_progressWords.setText("Word " + number+ " of " + (_currentQuiz.getNumberOfWords()));
 	}
 } 

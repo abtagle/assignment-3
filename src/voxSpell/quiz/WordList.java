@@ -28,7 +28,6 @@ public class WordList {
 			returnList.add(shufWords.get(i));
 			i++;
 		}
-		returnList.add(" ");
 		return returnList;
 	}
 	public boolean contains(String word){
