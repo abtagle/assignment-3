@@ -57,11 +57,11 @@ public class Lists {
 		File dir = f.getAbsoluteFile().getParentFile();
 		String path = dir.toString();
 
-		if(path.contains(":")){
+		if(!path.contains(":")){
+			setWordList(new File(path+WORDLIST));	
+		} else{
 			URL url = Lists.class.getResource(WORDLIST);
 			setWordList(new File(url.getPath()));
-		} else{
-			setWordList(new File(path+WORDLIST));
 		}
 	}
 
