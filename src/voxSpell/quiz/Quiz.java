@@ -52,18 +52,16 @@ public abstract class Quiz{
 							}
 							_wordNumberInt++;
 							_score++;
-							sayPhrase("Correct.");
-							sayWord();
+							sayPhrase("Correct. " +_wordlist.get(_wordNumberInt-1) + ".");
 						} else{
 							_attemptNumber++;
-							sayPhrase("Incorrect. Please try again.");
-							sayWord();
+							sayPhrase("Incorrect. Please try again. "+_wordlist.get(_wordNumberInt-1) + ".");
 						}
 						quizQuestion();
 						//Second attempt- failed or faulted
 					} else if (_attemptNumber == 2){
 						if(spelling.equals(_wordlist.get(_wordNumberInt-1).toLowerCase())){
-							new SayAnything("Correct. " + _wordlist.get(_wordNumberInt)).execute();
+							sayPhrase("Correct. " + _wordlist.get(_wordNumberInt) + ".");
 							Lists.getInstance().getFaulted().addWord(_wordlist.get(_wordNumberInt-1));
 							if(Lists.getInstance().getLastFailed().contains(_wordlist.get(_wordNumberInt-1))){
 								Lists.getInstance().getLastFailed().remove(_wordlist.get(_wordNumberInt-1));
@@ -82,9 +80,9 @@ public abstract class Quiz{
 						//Third attempt for review - no change to word status
 					} else{
 						if(spelling.equals(_wordlist.get(_wordNumberInt-1).toLowerCase())){
-							new SayAnything("Correct").execute();
+							sayPhrase("Correct." +_wordlist.get(_wordNumberInt-1) + "." );
 						} else{
-							new SayAnything("Incorrect").execute();
+							sayPhrase("Correct"+_wordlist.get(_wordNumberInt-1) + ".");
 						}
 						_attemptNumber = 1;
 						_wordNumberInt++;

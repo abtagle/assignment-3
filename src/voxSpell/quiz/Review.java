@@ -14,7 +14,7 @@ public class Review extends Quiz {
 		_attemptNumber = 3;
 		char[] wordAsCharArray = _wordlist.get(_wordNumberInt - 1).toCharArray();
 		StringBuilder say = new StringBuilder();
-		say.append("Incorrect." + _wordlist.get(_wordNumberInt - 1) + " is spelt.");
+		say.append("Incorrect. " + _wordlist.get(_wordNumberInt - 1) + " is spelt.");
 		try {
 			for (char i : wordAsCharArray) {
 				if (i == 'a') {
@@ -24,7 +24,7 @@ public class Review extends Quiz {
 				}
 			}
 			say.append(". Please spell " + _wordlist.get(_wordNumberInt - 1));
-			new SayAnything(say.toString());
+			new SayAnything(say.toString()).execute();
 			quizQuestion();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
