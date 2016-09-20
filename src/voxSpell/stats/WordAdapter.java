@@ -1,7 +1,6 @@
 package voxSpell.stats;
 
 import javax.swing.table.AbstractTableModel;
-
 import voxSpell.stats.FinalResult.AssessmentElement;
 
 
@@ -41,7 +40,7 @@ public class WordAdapter  extends AbstractTableModel implements WordListener {
 			break;
 		case 1: // tried.
 			value = result
-					.getAssessmentElement(FinalResult.AssessmentElement.Tried);
+					.getAssessmentElement(FinalResult.AssessmentElement.Attempted);
 			break;
 		case 2: // failed.
 			value = result

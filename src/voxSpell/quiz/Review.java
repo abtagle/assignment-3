@@ -24,7 +24,7 @@ public class Review extends Quiz {
 				}
 			}
 			say.append(". Please spell " + _wordlist.get(_wordNumberInt - 1));
-			new SayAnything(say.toString()).execute();
+			sayPhrase(say.toString());
 			quizQuestion();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -9,7 +9,7 @@ public class NewQuiz extends Quiz {
 
 	@Override
 	protected void spellAloud(String word) {
-		new SayAnything("Incorrect. ");
+		sayPhrase("Incorrect. ");
 		_wordNumberInt++;
 		_attemptNumber = 1;
 		updateWordNumberInGUI();

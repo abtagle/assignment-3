@@ -114,6 +114,7 @@ public abstract class Quiz{
 			//If there are no words left to quiz, show results
 		} else {
 			if(_isReview == false){
+				Lists.getInstance().addScore(_score);
 				if(_score >= 9 && GUI.getLevel()!=GUI.NUMBER_OF_LEVELS){
 					//From http://stackoverflow.com/questions/8396870/joptionpane-yes-or-no-window
 					int reply = JOptionPane.showConfirmDialog(null, "Congratulations! You scored " + _score + " out of " + _wordlist.size()+ ". Would you like to LEVEL UP?", "Level up!", JOptionPane.YES_NO_OPTION);
@@ -123,7 +124,6 @@ public abstract class Quiz{
 					}
 				}
 			}
-			Lists.getInstance().addScore(_score);
 			new TestStats(_score, getNumberOfWords());
 		}	
 	}

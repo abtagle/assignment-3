@@ -128,15 +128,16 @@ public class Lists {
 		_scores.get(GUI.getLevel()).add(score);
 	}
 
-	protected double getAverageScore(int level){
+	public String getAverageScore(int level){
 		int total = 0;
 		if ((_scores.get(level)).size() == 0){
-			return -1;
+			return "-";
 		}
 		for(int i : _scores.get(level)){
 			total += i;
 		}
-		return (double)total / (_scores.get(level).size());
+		double avg = (double)total / (_scores.get(level).size());
+		return avg + "";
 	}
 
 	public WordList getWordList(int level){
