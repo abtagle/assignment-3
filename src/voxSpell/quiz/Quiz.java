@@ -100,7 +100,7 @@ public abstract class Quiz{
 	}
 	public final void quizQuestion(){
 		//Only quiz if there are words left to quiz
-		if(_wordNumberInt< _wordlist.size()+1){
+		if(_wordNumberInt< _wordlist.size()){
 			try {
 				sayWord();
 
