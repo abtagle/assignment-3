@@ -179,10 +179,12 @@ public class QuizScreen{
 	}
 	private void setUneditable(){
 		_repeat.setEnabled(false);
+		_submit.setEnabled(false);
 		_viewStats.setEnabled(false);
 	}
 	private void setEditable(){
 		_repeat.setEnabled(true);
+		_submit.setEnabled(true);
 		_viewStats.setEnabled(true);
 	}
 	public void updateWordNumber(int number, int total){

@@ -121,6 +121,17 @@ public class WelcomeScreen {
 		_panel.add(_viewStats);
 
 		_clearStats = new JButton("Clear Stats");
+		_clearStats.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to clear all your statistics?", "Clear Stats", JOptionPane.YES_NO_OPTION);
+				if (reply == JOptionPane.YES_OPTION) {
+					GUI.increaseLevel();
+					JOptionPane.showMessageDialog(null, "Stats have been cleared");
+				}
+				
+			}
+		});
 		gbc_panel.gridx = 12;
 		gbc_panel.gridy = 11;
 		gbc_panel.gridwidth = 4;
