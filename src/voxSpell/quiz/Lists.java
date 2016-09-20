@@ -177,7 +177,6 @@ public class Lists {
 			writeListToFiles(_failed.returnArrayList(), FAILED);
 			writeListToFiles(_lastFailed.returnArrayList(), LAST_FAILED);
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

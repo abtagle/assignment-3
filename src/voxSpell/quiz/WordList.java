@@ -40,7 +40,7 @@ public class WordList {
 		return _words;
 	}
 	public int length(){
-		return _words.size()-1;
+		return _words.size();
 	}
 	public int frequencyOf(String word){
 		return Collections.frequency(_words, word);

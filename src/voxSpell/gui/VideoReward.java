@@ -26,7 +26,7 @@ import com.sun.jna.NativeLibrary;
  * Video player to display the video reward
  * 
  * @author  Nasser Giacaman, Caprica, atag549
- * Last Modified: 8 September, 2016
+ * Last Modified: 20 September, 2016
  *
  */
 public class VideoReward extends JFrame{
