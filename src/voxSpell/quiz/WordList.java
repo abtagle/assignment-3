@@ -36,7 +36,7 @@ public class WordList {
 	public void remove(String word){
 		_words.remove(word);
 	}
-	protected ArrayList<String> returnArrayList(){
+	public ArrayList<String> returnArrayList(){
 		return _words;
 	}
 	public int length(){
