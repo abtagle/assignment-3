@@ -1,18 +1,20 @@
 package voxSpell.stats;
 
+
+
 import voxSpell.quiz.Lists;
 import voxSpell.quiz.WordList;
 
 public class Statistics {
 	private Lists _listOfWords;
 	private WordList _wordList;
-	private boolean _doesContain;
 	private int _level;
 	private int _attempts;
 
+
 	public Statistics() {
 		_wordList = _listOfWords.getWordList(_level);
-		_doesContain = false;
+
 	}
 
 	public void getLevel(int level) {
@@ -28,7 +30,7 @@ public class Statistics {
 		String line = _wordList.getWord(numberToRead);
 
 		if (line == null) {
-			//nothing
+			//do nothing
 			
 		} else {
 			
@@ -47,7 +49,6 @@ public class Statistics {
 		WordList failedOnly = _listOfWords.getFailed();
 		int count = 0;
 		if (failedOnly.contains(word)) {
-			_doesContain = true;
 			for (int i = 0; i < _wordList.length(); i++) {
 				if (_wordList.getWord(i).equals(word)) {
 					count++;
@@ -62,7 +63,6 @@ public class Statistics {
 		WordList faultedOnly = _listOfWords.getFaulted();
 		int count = 0;
 		if (faultedOnly.contains(word)) {
-			_doesContain = true;
 			for (int i = 0; i < _wordList.length(); i++) {
 				if (_wordList.getWord(i).equals(word)) {
 					count++;
@@ -77,7 +77,6 @@ public class Statistics {
 		WordList masteredOnly = _listOfWords.getMastered();
 		int count = 0;
 		if (masteredOnly.contains(word)) {
-			_doesContain = true;
 			for (int i = 0; i < _wordList.length(); i++) {
 				if (_wordList.getWord(i).equals(word)) {
 					count++;

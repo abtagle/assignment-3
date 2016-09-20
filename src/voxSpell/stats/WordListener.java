@@ -7,4 +7,6 @@ public interface WordListener {
 	
 	
 	void WordsHaveChanged(WordBox word, FinalResult result);
+
+
 }

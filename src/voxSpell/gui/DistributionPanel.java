@@ -7,17 +7,6 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 
-/**
- * Class to graphically present, using a bar chart, the distribution of a set of
- * data points. A DistributionPanel instance shows the relative number of points
- * across a number of bands (e.g. 10 percentage bands 0-10%, 11-20%, ... 90-100%).
- * 
- * DistributionPanel is very basic but it represents a general charting 
- * component that can be used in different applications.
- * 
- * @author Ian Warren
- * 
- */
 @SuppressWarnings("serial")
 public class DistributionPanel extends JPanel {
 

@@ -28,7 +28,7 @@ import voxSpell.stats.WordBox;
 import voxSpell.stats.FinalResult.AssessmentElement;
 
 @SuppressWarnings("serial")
-public class GUIStats extends JFrame{
+public class StatisticsFrame extends JFrame{
 private LevelBox _boxOfLevels;
 private WordBox _boxOfWords;
 private Lists _list;
@@ -36,7 +36,7 @@ private int _levelSelected;
 private Statistics _stats;
 
 
-	public GUIStats() {
+	public StatisticsFrame() {
 		super("Statistics");
 		
 		//words from level
@@ -49,8 +49,8 @@ private Statistics _stats;
 		final DistributionPanel distributionPanel = new DistributionPanel();
 		DistributionPanelAdapter graphView = new DistributionPanelAdapter(distributionPanel);
 		
-		final StatisticsPanel statsPanel = new StatisticsPanel();
-		StatisticsPanelAdapter statsView = new StatisticsPanelAdapter(statsPanel);
+		final MathsPanel statsPanel = new MathsPanel();
+		MathsPanelAdapter statsView = new MathsPanelAdapter(statsPanel);
 
 		WordAdapter tableModel = new WordAdapter(_boxOfWords);
 		
@@ -69,7 +69,7 @@ private Statistics _stats;
 	
 	public void buildGUI(JPanel distribution, JPanel statsPanel, JTable tableView, JPanel levelPanel) {
 		JPanel right = new JPanel();
-		right.setBorder(BorderFactory.createTitledBorder("Statistics"));
+		right.setBorder(BorderFactory.createTitledBorder("Results"));
 		right.setLayout(new BoxLayout(right, BoxLayout.Y_AXIS));
 		right.add(distribution);
 		right.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -78,7 +78,7 @@ private Statistics _stats;
 		JPanel left = new JPanel();
 		left.setLayout(new BoxLayout(left, BoxLayout.Y_AXIS));
 		JScrollPane scroll = new JScrollPane(tableView);
-		scroll.setBorder(BorderFactory.createTitledBorder("Results"));
+		scroll.setBorder(BorderFactory.createTitledBorder("Words"));
 		left.add(scroll);
 		left.add(Box.createRigidArea(new Dimension(10, 0)));
 		left.add(levelPanel);
@@ -107,7 +107,7 @@ private Statistics _stats;
 	
 	//Runs application
 	public static void main(String args[]) {
-		new GUIStats();
+		new StatisticsFrame();
 	}
 	
 	

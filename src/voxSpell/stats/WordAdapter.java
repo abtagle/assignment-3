@@ -39,20 +39,16 @@ public class WordAdapter  extends AbstractTableModel implements WordListener {
 			value = result._word;
 			break;
 		case 1: // tried.
-			value = result
-					.getAssessmentElement(FinalResult.AssessmentElement.Attempted);
+			value = result.getAssessmentElement(FinalResult.AssessmentElement.Attempted);
 			break;
 		case 2: // failed.
-			value = result
-					.getAssessmentElement(FinalResult.AssessmentElement.Failed);
+			value = result.getAssessmentElement(FinalResult.AssessmentElement.Failed);
 			break;
 		case 3: // faulted.
-			value = result
-					.getAssessmentElement(FinalResult.AssessmentElement.Faulted);
+			value = result.getAssessmentElement(FinalResult.AssessmentElement.Faulted);
 			break;
 		case 4: // mastered.
-			value = result
-					.getAssessmentElement(FinalResult.AssessmentElement.Mastered);
+			value = result.getAssessmentElement(FinalResult.AssessmentElement.Mastered);
 			break;
 		}
 		return value;
@@ -61,21 +57,6 @@ public class WordAdapter  extends AbstractTableModel implements WordListener {
 	@Override
 	public String getColumnName(int col) {
 		return columnNames[col];
-	}
-
-
-
-	@Override
-	public Class<?> getColumnClass(int col) {
-		Class<?> columnClass = null;
-
-		if (col == 0) {
-			columnClass = String.class;
-		}
-		if (col == 1 || col == 2 || col == 3 || col == 4) {
-			columnClass = Integer.class;
-		}
-		return columnClass;
 	}
 	
 	/**

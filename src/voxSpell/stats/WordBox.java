@@ -5,12 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import voxSpell.stats.FinalResult.AssessmentElement;
-/**
- * Class to represent a collection of StudentResult instances.
- * 
- * @author Ian Warren
- * 
- */
+
 public class WordBox {
 	private Hashtable<String, FinalResult> _results;
 	private List<FinalResult> _indexedResults;
@@ -42,9 +37,8 @@ public class WordBox {
 		}
 	}
 
-	public FinalResult getResult(int studentID) {
-		Integer key = new Integer(studentID);
-		return _results.get(key);
+	public FinalResult getResult(FinalResult word) {
+		return _results.get(word);
 	}
 
 	public FinalResult getResultAt(int index) {
