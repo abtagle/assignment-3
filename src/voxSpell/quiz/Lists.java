@@ -67,10 +67,9 @@ public class Lists {
 
 	public static Lists getInstance(){
 		if (_thisList == null){
-			return new Lists();
-		} else{
-			return _thisList;
-		}
+			_thisList =  new Lists();
+		} 
+		return _thisList;
 	}
 
 	private WordList readInFile(String filename){

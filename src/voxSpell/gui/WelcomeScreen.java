@@ -126,7 +126,7 @@ public class WelcomeScreen {
 			public void actionPerformed(ActionEvent arg0) {
 				int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to clear all your statistics?", "Clear Stats", JOptionPane.YES_NO_OPTION);
 				if (reply == JOptionPane.YES_OPTION) {
-					GUI.increaseLevel();
+					Lists.getInstance().clearStats();
 					JOptionPane.showMessageDialog(null, "Stats have been cleared");
 				}
 				
