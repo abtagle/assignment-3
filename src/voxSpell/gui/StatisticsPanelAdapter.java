@@ -5,7 +5,6 @@ import java.util.Iterator;
 import voxSpell.stats.FinalResult;
 import voxSpell.stats.WordBox;
 import voxSpell.stats.WordListener;
-import voxSpell.stats.FinalResult.AssessmentElement;
 
 public class StatisticsPanelAdapter implements WordListener {
 

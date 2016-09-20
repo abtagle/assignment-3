@@ -1,23 +1,19 @@
 package voxSpell.stats;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.BufferedInputStream;
-import java.util.zip.DataFormatException;
-
-
+/**
+ * 
+ * This creates a FinalResult object
+ * @author Minha
+ *
+ */
 public class FinalResult {
 	
 	public enum AssessmentElement {
-		Tried, Failed, Faulted, Mastered
+		Attempted, Failed, Faulted, Mastered
 	};
 
 	public final String _word;
-	private int _tried;
+	private int _attempted;
 	private int _failed;
 	private int _faulted;
 	private int _mastered;
@@ -25,9 +21,9 @@ public class FinalResult {
 	/**
 	 * Creates a word result object with the given arguments.
 	 */
-	public FinalResult(String word,int tried, int failed, int faulted, int mastered) {
+	public FinalResult(String word,int attempt, int failed, int faulted, int mastered) {
 		this._word = word;
-		this._tried = tried;
+		this._attempted = attempt;
 		this._failed = failed;
 		this._faulted = faulted;
 		this._mastered = mastered;
@@ -44,25 +40,8 @@ public class FinalResult {
 		else if (element == AssessmentElement.Mastered)
 			return _mastered;
 		else {
-			return _tried;
+			return _attempted;
 		}
-	}
-
-	/**
-	 * Returns a String representation of a StudentResult object.
-	 */
-	public String toString() {
-		StringBuffer buffer = new StringBuffer(_word);
-
-		buffer.append(", Tried:");
-		buffer.append(_tried);
-		buffer.append(", failed: ");
-		buffer.append(_failed);
-		buffer.append(", faulted: ");
-		buffer.append(_faulted);
-		buffer.append(", mastered: ");
-		buffer.append(_mastered);
-		return buffer.toString();
 	}
 
 	/**
@@ -76,7 +55,7 @@ public class FinalResult {
 		else if (element == AssessmentElement.Mastered)
 			_mastered = mark;
 		else {
-			_tried = mark;
+			_attempted = mark;
 		}
 
 	}

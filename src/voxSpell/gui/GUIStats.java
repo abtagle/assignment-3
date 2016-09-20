@@ -5,9 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.io.FileNotFoundException;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -16,26 +13,19 @@ import javax.swing.BoxLayout;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
-import javax.swing.WindowConstants;
-
+import voxSpell.quiz.Lists;
 import voxSpell.stats.FinalResult;
 import voxSpell.stats.LevelBox;
-import voxSpell.quiz.Lists;
 import voxSpell.stats.Statistics;
 import voxSpell.stats.WordAdapter;
 import voxSpell.stats.WordBox;
-import voxSpell.gui.DistributionPanel;
-import voxSpell.gui.DistributionPanelAdapter;
-import voxSpell.gui.StatisticsPanel;
-import voxSpell.gui.StatisticsPanelAdapter;
+import voxSpell.stats.FinalResult.AssessmentElement;
 
 @SuppressWarnings("serial")
 public class GUIStats extends JFrame{
@@ -48,7 +38,7 @@ private Statistics _stats;
 
 	public GUIStats() {
 		super("Statistics");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
 		//words from level
 		_boxOfWords = new WordBox();
 		
@@ -74,7 +64,6 @@ private Statistics _stats;
 				buildGUI(distributionPanel, statsPanel, tableView, new LevelPanel());
 			}
 		});
-		
 		
 	}
 	
@@ -103,16 +92,26 @@ private Statistics _stats;
 		
 		add(mainPane);
 		
+		//closes program in response to the user closing the window
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+		
 		pack();
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(true);
 	}
 	
+	//Runs application
+	public static void main(String args[]) {
+		new GUIStats();
+	}
+	
 	
 	private class DataLoader extends SwingWorker<Void, FinalResult> {
-		
-		
 		@Override
 		protected Void doInBackground() {
 			int level = _levelSelected;
@@ -125,12 +124,13 @@ private Statistics _stats;
 			
 			do {
 				try {
-					//result = _stats.getAllStats;
+					result = _stats.next(numberOfWordsRead);
 					numberOfWordsRead++;
 					
 					if (result != null) {
-						publish(result);
-						
+						if (result.getAssessmentElement(AssessmentElement.Attempted) != 0) {
+							publish(result);
+						}
 						/* Update the bound variable relating to the task's 
 						 * progress. 
 						 */
@@ -157,51 +157,14 @@ private Statistics _stats;
 		 }
 	}
 	
-	
-	private class ProgressDialog extends JDialog implements PropertyChangeListener {
-		private JProgressBar _progressBar;
-		
-		public ProgressDialog(JFrame parent) {
-			super(parent);
-			_progressBar = new JProgressBar(0,100);
-			_progressBar.setPreferredSize(new Dimension(300,20));
-			_progressBar.setString("Loading");
-			_progressBar.setStringPainted(true);
-			_progressBar.setValue(0);
-			
-			JPanel centre = new JPanel();
-			centre.setBorder(BorderFactory.createEmptyBorder());
-			centre.add(_progressBar);
-			add(centre);
-			pack();
-			
-			setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-			setAlwaysOnTop(true);
-			setLocationRelativeTo(null);
-			setVisible(true);
-		}
 
-		@Override
-		public void propertyChange(PropertyChangeEvent evt) {
-			if(evt.getPropertyName().equals("progress")) {
-				int progress = (Integer)evt.getNewValue();
-				_progressBar.setValue(progress);
-				
-				if(progress == 100) {
-					this.dispose();
-				}
-			}
-		}
-	}
-	
-	
 	//inner class to call level jcombobox
 	private class LevelPanel extends JPanel {
 
 		public LevelPanel() {
 			ComboBoxModel<Integer> levels = new DefaultComboBoxModel<Integer>() {
 				{//change to get no of levels
-					for (int i = 1; i <= 10; i++) {
+					for (int i = 1; i <= _list.getNumberOfLevels(); i++) {
 						addElement(i);
 					}
 				}
@@ -214,16 +177,17 @@ private Statistics _stats;
 				int levelNumberSelected = (int) levelComboBox.getSelectedItem();
 				_levelSelected = _boxOfLevels.getLevel(levelNumberSelected);
 				_boxOfWords.setAssessmentPolicy(_levelSelected);
+				_stats.getLevel(_levelSelected);
+				
+				DataLoader worker = new DataLoader();
+				worker.execute();
+				
 			}
 		});
 		
 		this.setBorder(BorderFactory.createTitledBorder("Level"));
 		this.add(levelComboBox);
 		}
-	}
-	
-	public int getLevel(int level) {
-		return level;
 	}
 	
 }
