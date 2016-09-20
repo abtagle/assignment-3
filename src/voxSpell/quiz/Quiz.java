@@ -115,7 +115,7 @@ public abstract class Quiz{
 		} else {
 			if(_isReview == false){
 				Lists.getInstance().addScore(_score);
-				if(_score >= 9 && GUI.getLevel()!=GUI.NUMBER_OF_LEVELS){
+				if(_score >= 9 && GUI.getLevel()!= GUI.NUMBER_OF_LEVELS - 1){
 					//From http://stackoverflow.com/questions/8396870/joptionpane-yes-or-no-window
 					int reply = JOptionPane.showConfirmDialog(null, "Congratulations! You scored " + _score + " out of " + _wordlist.size()+ ". Would you like to LEVEL UP?", "Level up!", JOptionPane.YES_NO_OPTION);
 					if (reply == JOptionPane.YES_OPTION) {

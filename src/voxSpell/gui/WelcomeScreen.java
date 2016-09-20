@@ -115,7 +115,7 @@ public class WelcomeScreen {
 		_viewStats.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new GUIStats();
+				new AimeeStats();
 			}
 		});
 		_panel.add(_viewStats);
