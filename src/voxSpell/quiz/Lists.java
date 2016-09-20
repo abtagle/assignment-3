@@ -13,8 +13,6 @@ import java.util.Collections;
 
 import javax.swing.JOptionPane;
 
-import voxSpell.gui.GUI;
-
 /**
  * Class representing an almost database of all the lists of words used, allowing access to all of them throughout
  * the voxSpell.gui package
@@ -124,7 +122,7 @@ public class Lists {
 	}
 
 	protected void addScore(int score){
-		_scores.get(GUI.getLevel()).add(score);
+		_scores.get(getNumberOfLevels()).add(score);
 	}
 
 	public String getAverageScore(int level){
@@ -160,7 +158,7 @@ public class Lists {
 	}
 	public void setUpScores(){
 		_scores = new ArrayList<ArrayList<Integer>>();
-		for(int i = 0; i<GUI.NUMBER_OF_LEVELS; i++){
+		for(int i = 0; i<getNumberOfLevels(); i++){
 			_scores.add(new ArrayList<Integer>());
 		}
 	}
