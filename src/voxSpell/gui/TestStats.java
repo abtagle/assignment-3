@@ -30,7 +30,7 @@ public class TestStats {
 		GUI.getInstance().getFrame().getRootPane().setDefaultButton(_stats);
 		pane.add(_stats);
 		_stats.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent event) {
-			new WelcomeScreen();			
+			new AimeeStats();			
 		}
 		});
 		_home = new JButton("Return to Menu");
