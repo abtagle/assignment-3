@@ -16,14 +16,7 @@ public class MathsPanelAdapter implements WordListener {
 
 	@Override
 	public void WordsHaveChanged(WordBox word) {
-		int[] overallMarks = new int[word.size()];
-
-		int index = 0;
-		for (Iterator<FinalResult> i = word.iterator(); i.hasNext(); index++) {
-			FinalResult result = i.next();
-			overallMarks[index] = result.getAssessmentElement(FinalResult.AssessmentElement.Mastered);
-		}
-		_adaptee.compute(overallMarks);
+		_adaptee.compute();
 	}
 	
 	@Override 

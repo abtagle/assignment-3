@@ -84,7 +84,7 @@ public class WelcomeScreen {
 		_review.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(Lists.getInstance().getLastFailed().length() <= 0){
+				if(Lists.getInstance().getLastFailed().length() == 0){
 					JOptionPane.showMessageDialog(null, "There are no words available to review. Please try starting a new quiz.", "Review", JOptionPane.ERROR_MESSAGE);
 				} else{
 					new QuizScreen("Review", true);
@@ -115,12 +115,23 @@ public class WelcomeScreen {
 		_viewStats.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new GUIStats();
+				new StatisticsFrame();
 			}
 		});
 		_panel.add(_viewStats);
 
 		_clearStats = new JButton("Clear Stats");
+		_clearStats.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to clear all your statistics?", "Clear Stats", JOptionPane.YES_NO_OPTION);
+				if (reply == JOptionPane.YES_OPTION) {
+					Lists.getInstance().clearStats();
+					JOptionPane.showMessageDialog(null, "Stats have been cleared");
+				}
+				
+			}
+		});
 		gbc_panel.gridx = 12;
 		gbc_panel.gridy = 11;
 		gbc_panel.gridwidth = 4;

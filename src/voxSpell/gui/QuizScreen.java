@@ -47,7 +47,6 @@ public class QuizScreen{
 		GUI.getInstance().getFrame().pack();
 		GUI.getInstance().getFrame().setVisible(true);
 		GUI.getInstance().getFrame().getRootPane().setDefaultButton(_submit);
-		_currentQuiz.sayWord();
 		_currentQuiz.quizQuestion();
 	} 
 	private void addComponents(){
@@ -55,9 +54,9 @@ public class QuizScreen{
 		GridBagLayout gb_panel = new GridBagLayout();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		_panel.setLayout(gb_panel);
-		
+
 		_menu = new JButton("Return to Menu");
-		
+
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 0;
 		gbc_panel.gridwidth = 20;
@@ -71,15 +70,19 @@ public class QuizScreen{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to leave this quiz? All quiz progress will be lost.","Exit Quiz",  JOptionPane.YES_NO_OPTION);
-				if (reply == JOptionPane.YES_OPTION) {
+				if(!_isReview){
+					int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to leave this quiz? All quiz progress will be lost.","Exit Quiz",  JOptionPane.YES_NO_OPTION);
+					if (reply == JOptionPane.YES_OPTION) {
+						new WelcomeScreen();
+					}
+				} else{
 					new WelcomeScreen();
 				}
 			}
-			
+
 		});
 		_panel.add(_menu);
-		
+
 		_progressWords = new JLabel();
 		updateWordNumber(1, _currentQuiz.getNumberOfWords());
 		gbc_panel.gridx = 0;
@@ -104,7 +107,7 @@ public class QuizScreen{
 		gbc_panel.anchor = GridBagConstraints.NORTH;
 		gb_panel.setConstraints(_spellingBar, gbc_panel);
 		_panel.add(_spellingBar);
-		
+
 		_repeat = new JButton("Repeat");
 		_repeat.addActionListener(new ActionListener(){
 
@@ -114,9 +117,9 @@ public class QuizScreen{
 				_currentQuiz.sayWord();
 				setEditable();
 			}
-			
+
 		});
-		
+
 		gbc_panel.gridx = 15;
 		gbc_panel.gridy = 7;
 		gbc_panel.gridwidth = 3;
@@ -161,9 +164,10 @@ public class QuizScreen{
 				setEditable();
 				_spellingBar.setText("");
 			}
-			
+
 		});
 		_panel.add(_submit);
+
 
 		_viewStats = new JButton("View Stats");
 		gbc_panel.gridx = 14;
@@ -175,18 +179,27 @@ public class QuizScreen{
 		gbc_panel.weighty = 0;
 		gbc_panel.anchor = GridBagConstraints.NORTH;
 		gb_panel.setConstraints(_viewStats, gbc_panel);
+		_viewStats.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new AimeeStats();
+			}
+
+		});
 		_panel.add(_viewStats);
 
 	}
 	private void setUneditable(){
 		_repeat.setEnabled(false);
+		_submit.setEnabled(false);
 		_viewStats.setEnabled(false);
 	}
 	private void setEditable(){
 		_repeat.setEnabled(true);
+		_submit.setEnabled(true);
 		_viewStats.setEnabled(true);
 	}
 	public void updateWordNumber(int number, int total){
-		_progressWords.setText("Word " + number+ " of " + (_currentQuiz.getNumberOfWords()-1));
+		_progressWords.setText("Word " + number+ " of " + (_currentQuiz.getNumberOfWords()));
 	}
 } 

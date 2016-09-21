@@ -28,7 +28,6 @@ public class WordList {
 			returnList.add(shufWords.get(i));
 			i++;
 		}
-		returnList.add(" ");
 		return returnList;
 	}
 	public boolean contains(String word){
@@ -37,11 +36,11 @@ public class WordList {
 	public void remove(String word){
 		_words.remove(word);
 	}
-	protected ArrayList<String> returnArrayList(){
+	public ArrayList<String> returnArrayList(){
 		return _words;
 	}
 	public int length(){
-		return _words.size()-1;
+		return _words.size();
 	}
 	public int frequencyOf(String word){
 		return Collections.frequency(_words, word);

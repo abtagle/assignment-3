@@ -27,6 +27,14 @@ public class WordBox {
 			listener.WordsHaveChanged(this);
 		}
 	}
+	
+	public void removeResult(FinalResult result) {
+		_results.remove(new String(result._word));
+		_indexedResults = new ArrayList<FinalResult>(_results.values());
+		for(WordListener listener : _listeners) {
+			listener.WordsHaveChanged(this);
+		}
+	}
 
 	public void updateStudentResult(FinalResult result, AssessmentElement element, int mark) {
 		result.setAssessmentElement(element, mark, _level);
@@ -64,7 +72,6 @@ public class WordBox {
 	public void setAssessmentPolicy(int level) {
 		this._level = level;
 		
-		// Necessary?
 		for(WordListener listener : _listeners) {
 			listener.WordsHaveChanged(this);
 		}

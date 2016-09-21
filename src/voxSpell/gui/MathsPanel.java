@@ -3,6 +3,7 @@ package voxSpell.gui;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.BorderFactory;
@@ -10,9 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import voxSpell.quiz.Lists;
+
 @SuppressWarnings("serial")
 public class MathsPanel extends JPanel {
-
 	/* TextFields to display the statistics. */
 	private JTextField _averageField, _medianField;
 
@@ -23,45 +25,51 @@ public class MathsPanel extends JPanel {
 		setupPanel();
 	}
 
-	public void compute(int[] series) {
-		double average = getAverage(series);
-		int median = getMedian(series);
+	public void compute() {
+		double average = getAverage();
+		String median = getMedian();
 		
 		/*
 		 * Update the textfields with the new statistics values.
 		 */
 		_averageField.setText(formatNumber(average));
-		_medianField.setText(formatNumber(median));
+		_medianField.setText(median);
 	}
 
 
 	/**
 	 * Returns the average of a series of int values.
 	 */
-	private double getAverage(int[] series) {
-		double total = 0;
-
-		if (series.length == 0) {
-			return 0;
+	private double getAverage() {
+		int level = StatisticsFrame._levelSelected;
+		if (level - 1 < 0) {
+			return Lists.getInstance().getAverageDoubleScore(level);
 		}
-
-		for (int i = 0; i < series.length; i++) {
-			total += series[i];
+		else {
+			return Lists.getInstance().getAverageDoubleScore(level - 1);
 		}
-		return total / series.length;
 	}
 
 	/**
 	 * Returns the median value for a series of values.
 	 */
-	private int getMedian(int[] series) {
-		if (series.length == 0) {
-			return 0;
-		}
+	private String getMedian() {
+		int failed = Lists.getInstance().getFailed().length();
+		int faulted = Lists.getInstance().getFaulted().length();
+		int mastered = Lists.getInstance().getMastered().length();
 
-		/* Sort the series. */
-		Arrays.sort(series);
-		return series[series.length / 2];
+		if (failed == 0 && faulted == 0 && mastered == 0) {
+			return "No median overall";
+		}
+		else if(failed > faulted && failed > mastered){
+			return "Most failed overall";
+		}else if(faulted > mastered && faulted > failed){
+			return "Most faulted overall";
+		}else{
+			return "Most mastered overall";
+		}
+		
+		
 	}
 
 	/**

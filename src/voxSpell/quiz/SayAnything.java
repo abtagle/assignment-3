@@ -10,13 +10,16 @@ import javax.swing.SwingWorker;
 //Hopefully can find a way to adapt this
 class SayAnything extends SwingWorker<Void, Void>{
 	private String _phrase = null;
+	private String _fileName = ".say.scm";
+	
 	Process _process;
 	public SayAnything(String anything){
 		_phrase = anything;
 		//Create the .scm file
 		PrintWriter writer;
+		_phrase = anything;
 		try {
-			writer = new PrintWriter(".say.scm");
+			writer = new PrintWriter(_fileName);
 			writer.println("(voice_" + Settings.getInstance().getVoice() + ") ;;");
 			writer.println("(SayText \"" + _phrase + "\")");
 			writer.close();
@@ -25,10 +28,29 @@ class SayAnything extends SwingWorker<Void, Void>{
 			e.printStackTrace();
 		}
 	}
+	//If the phrase being said is a word, use a different .scm file
+	public SayAnything(String anything, boolean isWord){
+		if(isWord){
+			_fileName = ".word.scm";
+		}
+		PrintWriter writer;
+		_phrase = anything;
+		try {
+			writer = new PrintWriter(_fileName);
+			writer.println("(voice_" + Settings.getInstance().getVoice() + ") ;;");
+			writer.println("(SayText \"" + _phrase + "\")");
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
 
 	@Override
 	protected Void doInBackground(){
-		ProcessBuilder sayBuilder = new ProcessBuilder("/bin/bash", "-c", "festival -b .say.scm");
+		ProcessBuilder sayBuilder = new ProcessBuilder("/bin/bash", "-c", "festival -b " + _fileName);
 		try {
 			_process = sayBuilder.start();
 			_process.waitFor();

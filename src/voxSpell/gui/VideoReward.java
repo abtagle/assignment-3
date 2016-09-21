@@ -5,6 +5,7 @@ package voxSpell.gui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.net.URL;
 
 import javax.swing.JButton;
@@ -16,6 +17,7 @@ import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
+import voxSpell.quiz.Lists;
 
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
@@ -26,7 +28,7 @@ import com.sun.jna.NativeLibrary;
  * Video player to display the video reward
  * 
  * @author  Nasser Giacaman, Caprica, atag549
- * Last Modified: 8 September, 2016
+ * Last Modified: 20 September, 2016
  *
  */
 public class VideoReward extends JFrame{
@@ -73,9 +75,19 @@ public class VideoReward extends JFrame{
 		setLocation(100, 100);
 		setSize(1050, 600);
 		setVisible(true);
-		URL url = SelectLevel.class.getResource("/big_buck_bunny_1_minute.avi");
-		//String filename = "big_buck_bunny_1_minute.avi";
-		_video.playMedia(url.getPath());
+		//Read in the video
+		
+		File f = new File(System.getProperty("java.class.path"));
+		File dir = f.getAbsoluteFile().getParentFile();
+		String path = dir.toString();
+
+		if(!path.contains(":")){
+			path = path+"/big_buck_bunny_1_minute.avi";	
+		} else{
+			path = SelectLevel.class.getResource("/big_buck_bunny_1_minute.avi").getPath();
+		}
+		//URL url = SelectLevel.class.getResource("/big_buck_bunny_1_minute.avi");
+		_video.playMedia(path);
 		NativeLibrary.addSearchPath(
 				RuntimeUtil.getLibVlcLibraryName(), "/Applications/vlc-2.0.0/VLC.app/Contents/MacOS/lib"
 				);

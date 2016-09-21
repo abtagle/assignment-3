@@ -3,9 +3,8 @@ package voxSpell.gui;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.List;
+import java.util.TreeSet;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -22,18 +21,15 @@ import javax.swing.SwingWorker;
 import voxSpell.quiz.Lists;
 import voxSpell.stats.FinalResult;
 import voxSpell.stats.LevelBox;
-import voxSpell.stats.Statistics;
 import voxSpell.stats.WordAdapter;
 import voxSpell.stats.WordBox;
-import voxSpell.stats.FinalResult.AssessmentElement;
 
 @SuppressWarnings("serial")
 public class StatisticsFrame extends JFrame{
 private LevelBox _boxOfLevels;
 private WordBox _boxOfWords;
-private Lists _list;
-private int _levelSelected;
-private Statistics _stats;
+public static int _levelSelected;
+private TreeSet<String> _wordsTested;
 
 
 	public StatisticsFrame() {
@@ -42,8 +38,9 @@ private Statistics _stats;
 		//words from level
 		_boxOfWords = new WordBox();
 		
-		//level 
+		//level checks
 		_boxOfLevels = new LevelBox();
+		//set default policy
 		_boxOfWords.setAssessmentPolicy(_boxOfLevels.getDefaultLevel());
 		
 		final DistributionPanel distributionPanel = new DistributionPanel();
@@ -65,11 +62,14 @@ private Statistics _stats;
 			}
 		});
 		
+		DataLoader worker = new DataLoader();
+		worker.execute();
+		
 	}
 	
 	public void buildGUI(JPanel distribution, JPanel statsPanel, JTable tableView, JPanel levelPanel) {
 		JPanel right = new JPanel();
-		right.setBorder(BorderFactory.createTitledBorder("Results"));
+		right.setBorder(BorderFactory.createTitledBorder("Results and Distribution of Levels"));
 		right.setLayout(new BoxLayout(right, BoxLayout.Y_AXIS));
 		right.add(distribution);
 		right.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -92,57 +92,42 @@ private Statistics _stats;
 		
 		add(mainPane);
 		
-		//closes program in response to the user closing the window
-		addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				System.exit(0);
-			}
-		});
-		
 		pack();
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(true);
 	}
 	
-	//Runs application
-	public static void main(String args[]) {
-		new StatisticsFrame();
+	private void getAllStats() {
+		_wordsTested = new TreeSet<String>();
+		_wordsTested.addAll(Lists.getInstance().getFailed().returnArrayList());
+		_wordsTested.addAll(Lists.getInstance().getFaulted().returnArrayList());
+		_wordsTested.addAll(Lists.getInstance().getMastered().returnArrayList());
 	}
-	
 	
 	private class DataLoader extends SwingWorker<Void, FinalResult> {
 		@Override
 		protected Void doInBackground() {
-			int level = _levelSelected;
-			final int numberOfWordsToRead = _list.getWordList(level).length();
-			int numberOfWordsRead = 0;
 			
-			setProgress(0);
+			FinalResult insideResult = null;
+			getAllStats();
 			
-			FinalResult result = null;
-			
-			do {
-				try {
-					result = _stats.next(numberOfWordsRead);
-					numberOfWordsRead++;
+			for(String i :_wordsTested){
+				insideResult = null;
+				//if (i == null) {
+					//do nothing
+				//}
+				//else if (Lists.getInstance().getWordList(_levelSelected).contains(i)) {
+					int failed = Lists.getInstance().getFailed().frequencyOf(i);
+					int faulted = Lists.getInstance().getFaulted().frequencyOf(i);
+					int mastered = Lists.getInstance().getMastered().frequencyOf(i);
+					int attempts = failed + faulted + mastered;
 					
-					if (result != null) {
-						if (result.getAssessmentElement(AssessmentElement.Attempted) != 0) {
-							publish(result);
-						}
-						/* Update the bound variable relating to the task's 
-						 * progress. 
-						 */
-						setProgress( (int)((double)numberOfWordsRead / (double)numberOfWordsToRead * 100));
-					}
 					
-				
-					Thread.sleep(100);
-				} catch(InterruptedException e) {
-					// No action required.
-				}
-			} while (result != null);
+					insideResult = new FinalResult(i, attempts, failed, faulted, mastered);
+					publish(insideResult);
+			//	}
+			}
 		
 			return null;
 		}
@@ -152,10 +137,11 @@ private Statistics _stats;
 	     protected void process(List<FinalResult> results) {
 			 for(FinalResult result : results) {
 				 _boxOfWords.addResult(result);
- 
+				
 			 }
 		 }
 	}
+	
 	
 
 	//inner class to call level jcombobox
@@ -164,7 +150,7 @@ private Statistics _stats;
 		public LevelPanel() {
 			ComboBoxModel<Integer> levels = new DefaultComboBoxModel<Integer>() {
 				{//change to get no of levels
-					for (int i = 1; i <= _list.getNumberOfLevels(); i++) {
+					for (int i = 1; i <= Lists.getInstance().getNumberOfLevels(); i++) {
 						addElement(i);
 					}
 				}
@@ -177,7 +163,6 @@ private Statistics _stats;
 				int levelNumberSelected = (int) levelComboBox.getSelectedItem();
 				_levelSelected = _boxOfLevels.getLevel(levelNumberSelected);
 				_boxOfWords.setAssessmentPolicy(_levelSelected);
-				_stats.getLevel(_levelSelected);
 				
 				DataLoader worker = new DataLoader();
 				worker.execute();

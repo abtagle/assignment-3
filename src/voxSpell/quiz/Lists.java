@@ -67,10 +67,9 @@ public class Lists {
 
 	public static Lists getInstance(){
 		if (_thisList == null){
-			return new Lists();
-		} else{
-			return _thisList;
-		}
+			_thisList =  new Lists();
+		} 
+		return _thisList;
 	}
 
 	private WordList readInFile(String filename){
@@ -128,15 +127,28 @@ public class Lists {
 		_scores.get(GUI.getLevel()).add(score);
 	}
 
-	protected double getAverageScore(int level){
+	public String getAverageScore(int level){
 		int total = 0;
 		if ((_scores.get(level)).size() == 0){
-			return -1;
+			return "-";
 		}
 		for(int i : _scores.get(level)){
 			total += i;
 		}
-		return (double)total / (_scores.get(level).size());
+		double avg = (double)total / (_scores.get(level).size());
+		return avg + "";
+	}
+	
+	public double getAverageDoubleScore(int level){
+		int total = 0;
+		if ((_scores.get(level)).size() == 0){
+			return 0.0;
+		}
+		for(int i : _scores.get(level)){
+			total += i;
+		}
+		double avg = (double)total / (_scores.get(level).size());
+		return avg*10;
 	}
 
 	public WordList getWordList(int level){
@@ -177,7 +189,7 @@ public class Lists {
 			writeListToFiles(_failed.returnArrayList(), FAILED);
 			writeListToFiles(_lastFailed.returnArrayList(), LAST_FAILED);
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 	}
