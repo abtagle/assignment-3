@@ -10,7 +10,15 @@ import javax.swing.JOptionPane;
 import voxSpell.gui.GUI;
 import voxSpell.gui.QuizScreen;
 import voxSpell.gui.TestStats;
-
+/**
+ * Abstract class representing the quiz format (extended to represent NewQuiz and Review), with 
+ * quiz length of up to 10 words
+ * 
+ * Taken from Softeng 206 Assignment 2 submission by Aimee Tagle
+ * 
+ * @author atag549
+ * Last Modified: 22 September, 2016
+ */
 public abstract class Quiz{
 	protected String _name;
 	protected int _score;
@@ -37,6 +45,10 @@ public abstract class Quiz{
 
 
 	}
+	/**
+	 * Compares the spelling given by the user with the current word to spell in the quiz
+	 * @param rawSpelling
+	 */
 	public final void checkSpelling(String rawSpelling){
 		if( rawSpelling.trim().equals("") == false){
 			//make trim string

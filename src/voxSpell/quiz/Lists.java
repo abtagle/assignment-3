@@ -18,6 +18,7 @@ import voxSpell.gui.GUI;
 /**
  * Class representing an almost database of all the lists of words used, allowing access to all of them throughout
  * the voxSpell.gui package
+ * Taken from Softeng 206 Assignment 2 submission by Aimee Tagle
  * @author atag549
  * Last Modified: 18 September, 2016
  *

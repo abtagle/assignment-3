@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Class representing a word list
+ * Class representing a word list, storing words with a backing ArrayList<String>
+ * Convenient due to the operations required to occur on lists of words.
+ * 
+ * Taken from Softeng 206 Assignment 2 submission by Aimee Tagle
+ * Last Modified: During 19 September, 2016
+ * 
 **/
 public class WordList {
 	public static final int QUIZ_SIZE = 10;

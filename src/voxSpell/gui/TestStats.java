@@ -7,7 +7,14 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-
+/**
+ * Class representing the screen which appears after quiz finishes showing scores and providing more options.
+ * Written by Aimee Tagle for assignment 2
+ * 
+ * @author atag549
+ * Last Modified: 20 September, 2016
+ *
+ */
 public class TestStats {
 	private JLabel _title;
 	private JLabel _score;

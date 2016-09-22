@@ -19,7 +19,7 @@ import voxSpell.quiz.Settings;
  * Updated for assignment 3 (so we don't save word lists we can't really use)
  * 
  * @author atag549
- * Modified 06/09/16
+ * Modified 21 September, 2016
  *
  */
 

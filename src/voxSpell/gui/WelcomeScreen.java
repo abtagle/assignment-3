@@ -5,6 +5,12 @@ package voxSpell.gui;
 //	Then almost entirely edited because the layout kept turning out wrong by Aimee Tagle 14/09/16
 //http://www.jvider.com/
 //======================================================
+/**
+ * Class representing the main menu and welcome screen that leads to the other options
+ * 
+ * Taken from Softeng 206 Assignment 2 submission by Aimee Tagle
+ * Last Modified: 22 September, 2016
+ */
 import javax.swing.JPanel;
 
 import voxSpell.quiz.Lists;

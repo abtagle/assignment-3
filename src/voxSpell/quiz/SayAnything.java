@@ -6,8 +6,13 @@ import java.io.PrintWriter;
 
 import javax.swing.SwingWorker;
 
-//Says words in background (unnecessary SwingWorker, but implemented before I realised timing issues with festival
-//Hopefully can find a way to adapt this
+/**
+ * Swingworker class in responsible for making Festival calls to say words aloud via .scm files.
+ * 
+ * Taken from Softeng 206 Assignment 2 submission by Aimee Tagle (originally an inner class)
+ * @author osboxes
+ * Last Modified: 21 September, 2016
+ */
 class SayAnything extends SwingWorker<Void, Void>{
 	private String _phrase = null;
 	private String _fileName = ".say.scm";

@@ -16,6 +16,7 @@ package voxSpell.gui;
  * @author: atag549
  * Last Modified: 18 September, 2016
  */
+ 
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.BorderFactory;

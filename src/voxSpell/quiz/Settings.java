@@ -1,5 +1,14 @@
 package voxSpell.quiz;
 
+/*
+ * Class representing the user interface of the settings page where users can change the festival voice
+ * used in quizes
+ * 
+ * Class by Aimee Tagle for Assignment 3
+ * Last Modified: 19 September, 2016
+ * 
+ */
+
 public class Settings {
 	static Settings _settings = null;
 	String _voiceName;

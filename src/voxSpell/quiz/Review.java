@@ -1,7 +1,11 @@
 package voxSpell.quiz;
 
 import voxSpell.gui.QuizScreen;
-
+/**
+ * Class representing review, where when a word is failed twice, the word is spelt aloud.
+ * @author atag549
+ *	Last Modified: 22 September 2016
+ */
 public class Review extends Quiz {
 
 	public Review(int level, QuizScreen screen) {
