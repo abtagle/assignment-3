@@ -24,6 +24,14 @@ import voxSpell.stats.LevelBox;
 import voxSpell.stats.WordAdapter;
 import voxSpell.stats.WordBox;
 
+/**
+ * Referenced from Ian Warren's "Course Analyzer" program from SOFTENG251.
+ * 
+ * This is the main JFrame for the statistics, created every time the viewStats in the WelcomeScreen
+ * class is called.
+ * @author Minha
+ *
+ */
 @SuppressWarnings("serial")
 public class StatisticsFrame extends JFrame{
 private LevelBox _boxOfLevels;
@@ -31,7 +39,9 @@ private WordBox _boxOfWords;
 public static int _levelSelected;
 private TreeSet<String> _wordsTested;
 
-
+	/*
+	 * Creates and initializes the components and panels into the frame
+	 */
 	public StatisticsFrame() {
 		super("Statistics");
 		
@@ -66,7 +76,7 @@ private TreeSet<String> _wordsTested;
 		worker.execute();
 		
 	}
-	
+	/* Builds GUI frame and adds component to the frame */
 	public void buildGUI(JPanel distribution, JPanel statsPanel, JTable tableView, JPanel levelPanel) {
 		JPanel right = new JPanel();
 		right.setBorder(BorderFactory.createTitledBorder("Results and Distribution of Levels"));
@@ -97,7 +107,7 @@ private TreeSet<String> _wordsTested;
 		setResizable(false);
 		setVisible(true);
 	}
-	
+	/* creates a tree set of the words */
 	private void getAllStats() {
 		_wordsTested = new TreeSet<String>();
 		_wordsTested.addAll(Lists.getInstance().getFailed().returnArrayList());
@@ -105,6 +115,7 @@ private TreeSet<String> _wordsTested;
 		_wordsTested.addAll(Lists.getInstance().getMastered().returnArrayList());
 	}
 	
+	/* Using SwingWorker, the words in the tree set are print out with their respective results */
 	private class DataLoader extends SwingWorker<Void, FinalResult> {
 		@Override
 		protected Void doInBackground() {
