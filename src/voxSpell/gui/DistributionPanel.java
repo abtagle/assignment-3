@@ -6,18 +6,9 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import voxSpell.quiz.Lists;
 
-/**
- * Class to graphically present, using a bar chart, the distribution of a set of
- * data points. A DistributionPanel instance shows the relative number of points
- * across a number of bands (e.g. 10 percentage bands 0-10%, 11-20%, ... 90-100%).
- * 
- * DistributionPanel is very basic but it represents a general charting 
- * component that can be used in different applications.
- * 
- * @author Ian Warren
- * 
- */
+
 @SuppressWarnings("serial")
 public class DistributionPanel extends JPanel {
 
@@ -28,14 +19,14 @@ public class DistributionPanel extends JPanel {
 	private static final int BAR_CEILING = 120;
 
 	/* The gap between bars. */
-	private static final int HORIZONTAL_GAP = 5;
+	private static final int HORIZONTAL_GAP = 4;
 
 	/*
 	 * Left, right, top and bottom margin size; the border around the bar chart.
 	 */
 	private static final int MARGIN = 10;
 	
-	private static final int DEFAULT_NUMBER_OF_BARS = 10;
+	private static final int DEFAULT_NUMBER_OF_BARS = Lists.getInstance().getNumberOfLevels();
 
 	/*
 	 * The number to multiply the height of bars by to ensure that the highest
@@ -46,7 +37,7 @@ public class DistributionPanel extends JPanel {
 
 	private int _numberOfBars;
 	
-	private int[] _distribution;
+	private double[] _distribution;
 
 	/**
 	 * Creates a DistributionPanel object.
@@ -70,7 +61,7 @@ public class DistributionPanel extends JPanel {
 		return new Dimension(width, height);
 	}
 
-	public void compute(int[] distribution, int numberOfDataPoints) {
+	public void compute(double[] distribution) {
 		_distribution = distribution;
 		repaint();
 	}
@@ -87,7 +78,7 @@ public class DistributionPanel extends JPanel {
 		}
 
 		/* Normalise distribution. */
-		int highestNormalisedValue = 0;
+		double highestNormalisedValue = 0;
 		for (int i = 0; i < _distribution.length; i++) {
 			_distribution[i] = (int) ((double) _distribution[i] / 84 * 100);
 			if (i == 0) {
@@ -102,11 +93,21 @@ public class DistributionPanel extends JPanel {
 		int x = MARGIN;
 
 		for (int i = 0; i < _distribution.length; i++) {
-			g.setColor(Color.red);
+			int level = StatisticsFrame._levelSelected;
+			if (level == 0) {
+				g.setColor(Color.red);
+			}
+			else if (i == level - 1) {
+				g.setColor(Color.green);
+			}
+			else {
+				g.setColor(Color.red);
+			}
 			g.fillRect(x, BAR_CEILING + MARGIN
 					- (int) (_distribution[i] * _barHeightMultiplier), BAR_WIDTH,
 					(int) (_distribution[i] * _barHeightMultiplier));
-
+			
+			
 			g.setColor(Color.black);
 			g.drawLine(x, BAR_CEILING + MARGIN, x + BAR_WIDTH - 1, BAR_CEILING
 					+ MARGIN);

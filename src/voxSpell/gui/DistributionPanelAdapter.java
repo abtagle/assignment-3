@@ -1,7 +1,7 @@
 package voxSpell.gui;
 
-import java.util.Iterator;
 
+import voxSpell.quiz.Lists;
 import voxSpell.stats.FinalResult;
 import voxSpell.stats.WordBox;
 import voxSpell.stats.WordListener;
@@ -17,20 +17,13 @@ public class DistributionPanelAdapter implements WordListener {
 
 	@Override
 	public void WordsHaveChanged(WordBox word) {
-		int[] distribution = new int[ 10 ];
+		double[] distribution = new double [ Lists.getInstance().getNumberOfLevels() ];
 		
-		for (Iterator<FinalResult> i = word.iterator(); i.hasNext();) {
-			FinalResult result = i.next();
-			int attempts = result.getAssessmentElement(FinalResult.AssessmentElement.Mastered);
-
-			if (attempts == 10) {
-				distribution[9]++;
-			} else {
-				distribution[attempts]++;
-			}
+		for (int i = 0; i < Lists.getInstance().getNumberOfLevels(); i++)  {
+				distribution[i] = Lists.getInstance().getAverageDoubleScore(i);
 		}
 		
-		_adaptee.compute(distribution, word.size());
+		_adaptee.compute(distribution);
 	}
 	
 	@Override 

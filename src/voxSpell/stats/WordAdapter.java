@@ -39,20 +39,16 @@ public class WordAdapter  extends AbstractTableModel implements WordListener {
 			value = result._word;
 			break;
 		case 1: // tried.
-			value = result
-					.getAssessmentElement(FinalResult.AssessmentElement.Attempted);
+			value = result.getAssessmentElement(FinalResult.AssessmentElement.Attempted);
 			break;
 		case 2: // failed.
-			value = result
-					.getAssessmentElement(FinalResult.AssessmentElement.Failed);
+			value = result.getAssessmentElement(FinalResult.AssessmentElement.Failed);
 			break;
 		case 3: // faulted.
-			value = result
-					.getAssessmentElement(FinalResult.AssessmentElement.Faulted);
+			value = result.getAssessmentElement(FinalResult.AssessmentElement.Faulted);
 			break;
 		case 4: // mastered.
-			value = result
-					.getAssessmentElement(FinalResult.AssessmentElement.Mastered);
+			value = result.getAssessmentElement(FinalResult.AssessmentElement.Mastered);
 			break;
 		}
 		return value;
@@ -62,31 +58,7 @@ public class WordAdapter  extends AbstractTableModel implements WordListener {
 	public String getColumnName(int col) {
 		return columnNames[col];
 	}
-
-
-
-	@Override
-	public Class<?> getColumnClass(int col) {
-		Class<?> columnClass = null;
-
-		if (col == 0) {
-			columnClass = String.class;
-		}
-		if (col == 1 || col == 2 || col == 3 || col == 4) {
-			columnClass = Integer.class;
-		}
-		return columnClass;
-	}
 	
-	/**
-	 * Updates the value of an exam, test or assignment mark for a particular
-	 * StudentResult.
-	 * @param value the new mark value, expected to be a Percentage object.
-	 * @param row the row within the table that identifies the StudentResult
-	 *        that is to be changed.
-	 * @param col the column within the table that identifies the mark to be
-	 *        changed (exam, test or assignment).
-	 */
 	@Override
 	public void setValueAt(Object value, int row, int col) {
 		if(value instanceof Integer) {

@@ -5,12 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import voxSpell.stats.FinalResult.AssessmentElement;
-/**
- * Class to represent a collection of StudentResult instances.
- * 
- * @author Ian Warren
- * 
- */
+
 public class WordBox {
 	private Hashtable<String, FinalResult> _results;
 	private List<FinalResult> _indexedResults;
@@ -27,7 +22,14 @@ public class WordBox {
 		_results.put(new String(result._word), result);
 		_indexedResults = new ArrayList<FinalResult>(_results.values());
 		
-		// Notify listeners.
+		for(WordListener listener : _listeners) {
+			listener.WordsHaveChanged(this);
+		}
+	}
+	
+	public void removeResult(FinalResult result) {
+		_results.remove(new String(result._word));
+		_indexedResults = new ArrayList<FinalResult>(_results.values());
 		for(WordListener listener : _listeners) {
 			listener.WordsHaveChanged(this);
 		}
@@ -36,15 +38,13 @@ public class WordBox {
 	public void updateStudentResult(FinalResult result, AssessmentElement element, int mark) {
 		result.setAssessmentElement(element, mark, _level);
 		
-		// Notify listeners.
 		for(WordListener listener : _listeners) {
 			listener.WordsHaveChanged(this, result);
 		}
 	}
 
-	public FinalResult getResult(int studentID) {
-		Integer key = new Integer(studentID);
-		return _results.get(key);
+	public FinalResult getResult(FinalResult word) {
+		return _results.get(word);
 	}
 
 	public FinalResult getResultAt(int index) {
@@ -70,7 +70,6 @@ public class WordBox {
 	public void setAssessmentPolicy(int level) {
 		this._level = level;
 		
-		// Necessary?
 		for(WordListener listener : _listeners) {
 			listener.WordsHaveChanged(this);
 		}

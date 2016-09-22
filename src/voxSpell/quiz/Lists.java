@@ -138,6 +138,17 @@ public class Lists {
 		double avg = (double)total / (_scores.get(level).size());
 		return avg + "";
 	}
+	public double getAverageDoubleScore(int level){
+  		int total = 0;
+  		if ((_scores.get(level)).size() == 0){
+ 			return 0.0;
+  		}
+  		for(int i : _scores.get(level)){
+  			total += i;
+  		}
+ 		double avg = (double)total / (_scores.get(level).size());
+ 		return avg*10;
+  	}
 
 	public WordList getWordList(int level){
 		return _wordLists.get(level);
@@ -169,6 +180,7 @@ public class Lists {
 		_faulted = new WordList();
 		_failed = new WordList();
 		_lastFailed = new WordList();
+		setUpScores();
 	}
 	public void writeAllStats(){
 		try {
