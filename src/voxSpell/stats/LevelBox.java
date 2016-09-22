@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Referenced from Ian Warren's "Course Analyzer" program from SOFTENG251.
+ * 
+ * A list of level objects used to use default and check if the level is valid
+ * @author Minha
+ *
+ */
 public class LevelBox {
 	
 	private List<Integer> _levels;
