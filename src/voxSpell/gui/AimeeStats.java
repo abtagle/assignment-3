@@ -16,7 +16,12 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import voxSpell.quiz.Lists;
-
+/**
+ * Alternate statistics viewing class for uses when a user is in the middle of a quiz and does not
+ * desire in depth statistics. 
+ * @author atag549
+ * Last Modified: 21 September, 2016
+ */
 public class AimeeStats {
 	JFrame _frame;
 	private JPanel _leftPanel;
