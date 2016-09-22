@@ -8,7 +8,15 @@ import javax.swing.JPanel;
 
 import voxSpell.quiz.Lists;
 
-
+/**
+ * Referenced from Ian Warren's "Course Analyzer" program from SOFTENG251.
+ * 
+ * This panel draws the bar graph of averages for each level in the quiz. When a level
+ * is selected in the JComboBox, the bar relative to the level changes colour to show that
+ * the level selection has changed.
+ * @author Minha
+ *
+ */
 @SuppressWarnings("serial")
 public class DistributionPanel extends JPanel {
 

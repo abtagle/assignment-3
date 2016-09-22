@@ -10,6 +10,14 @@ import javax.swing.JTextField;
 
 import voxSpell.quiz.Lists;
 
+/**
+ * Referenced from Ian Warren's "Course Analyzer" program from SOFTENG251.
+ * 
+ * This creates a Statistics Panel Object which calculates the average of the chosen
+ * level and overall median of the quizzed word.
+ * @author Minha
+ *
+ */
 @SuppressWarnings("serial")
 public class MathsPanel extends JPanel {
 	/* TextFields to display the statistics. */

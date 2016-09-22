@@ -1,8 +1,9 @@
 package voxSpell.stats;
 
 /**
+ * Referenced from Ian Warren's "Course Analyzer" program from SOFTENG251.
  * 
- * This creates a FinalResult object
+ * This creates a FinalResult object with assessment elements of attempted and results
  * @author Minha
  *
  */

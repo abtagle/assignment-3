@@ -4,8 +4,8 @@ Last Modified: 22 September. 2016
 ------------------------------------
 RUNNING THE JAR FILE
 ------------------------------------
+This assignment should run correctly in the standard Linux environment on lab computers (with Java 1.7). Before executing the .jar file, ensure that you have the following two files in the same directory as your .jar file
 
-This assignment should run correcly in the standard Linux environment on lab computers (with Java 1.7). Before executing the .jar file, ensure that you have the following two files in the same directory as your .jar file
 	-wordlist.txt
 	-big_buck_bunny_1_minute.avi
 
