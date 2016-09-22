@@ -19,6 +19,8 @@ public class Review extends Quiz {
 			for (char i : wordAsCharArray) {
 				if (i == 'a') {
 					say.append(" ay.");
+				} else if (i == '\'') {
+					say.append(" apostrophe.");
 				} else {
 					say.append(" " + i + ".");
 				}

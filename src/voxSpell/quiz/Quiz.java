@@ -93,7 +93,7 @@ public abstract class Quiz{
 
 				}
 			}else {
-				JOptionPane.showMessageDialog(null, "Only alphabetical characters (a-z/A-Z) may be used for spelling.", "Review", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Only alphabetical characters (a-z/A-Z) and apostrophes may be used for spelling.", "Review", JOptionPane.ERROR_MESSAGE);
 			}
 
 		} 
@@ -136,7 +136,7 @@ public abstract class Quiz{
 	protected final boolean containsInvalidCharacters(String word){
 		char[] wordArray = word.trim().toCharArray();
 		for	(char i : wordArray){
-			if(i < 'a' || i > 'z'){
+			if((i < 'a' || i > 'z')&&(i!='\'')){
 				return true;
 			}
 		}
